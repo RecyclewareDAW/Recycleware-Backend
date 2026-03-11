@@ -1,7 +1,13 @@
 package com.proyecto.daw.repository;
 
 
-public class ProductoRepository extends JpaRepository<Producto, Integer> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import com.proyecto.daw.model.Producto;
+
+public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     
     // ****************************
     // Métodos HEREDADOS
@@ -20,5 +26,5 @@ public class ProductoRepository extends JpaRepository<Producto, Integer> {
      * existById(id)
      */
 
-    
+
 }

@@ -28,7 +28,7 @@ import lombok.ToString;
 @EqualsAndHashCode(exclude = {"estado", "categoria"})  // Excluir de equals y hashCode para evitar recursividad
 @Entity
 @Table(name = "productos")
-public class Productos implements Serializable {
+public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

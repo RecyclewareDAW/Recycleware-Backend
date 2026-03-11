@@ -44,6 +44,6 @@ public class EstadosProducto implements Serializable {
 
     @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("estado")
-    private Set<Productos> productos;
+    private Set<Producto> productos;
 
 }

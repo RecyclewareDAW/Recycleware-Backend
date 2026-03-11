@@ -43,6 +43,6 @@ public class CategoriasProducto implements Serializable {
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("categoria")
-    private Set<Productos> productos;
+    private Set<Producto> productos;
 
 }
