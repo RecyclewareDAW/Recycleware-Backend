@@ -25,3 +25,5 @@ INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, pro
 VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '1234', 'Calle Falsa 123', 'Alicante', '03001');
 INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, provincia, codigo_postal)
 VALUES ('Admin2', '12345675X', '600111222', 'admin@recyclee.com', '1234', 'Calle Falsa 123', 'Alicante', '03001');
+INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, provincia, codigo_postal, razon_social, nombre_contacto)
+VALUES ('Bela', '12345635X', '600111222', 'bela@recyclee.com', '1234', 'Calle Falsa 123', 'Alicante', '03001', 'Belita SL', 'Yo');
