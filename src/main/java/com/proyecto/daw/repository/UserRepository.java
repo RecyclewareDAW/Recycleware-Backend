@@ -29,12 +29,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * existById(id)
      */
 
-    @Query(value = "SELECT * FROM usuarios", nativeQuery = true)
-    List<User> findSqlAll();
-
     @Query(value = "SELECT * FROM usuarios WHERE id = :id", nativeQuery = true)
-    User findSqlById(@Param("id") int userId);
+    User findById(@Param("id") int userId);
 
-    @Query(value = "SELECT * FROM usuarios WHERE UPPER(nombre) LIKE UPPER(CONCAT('%', :cadena, '%')) OR UPPER(nombre) LIKE UPPER(CONCAT('%', :cadena, '%'))", nativeQuery = true)
+    @Query(value = "SELECT * FROM usuarios WHERE UPPER(nombre) LIKE UPPER(CONCAT('%', :cadena, '%')) OR UPPER(razon_social) LIKE UPPER(CONCAT('%', :cadena, '%'))", nativeQuery = true)
     List<User> findByNameContaining(@Param("cadena") String name);
+
+    
 }
