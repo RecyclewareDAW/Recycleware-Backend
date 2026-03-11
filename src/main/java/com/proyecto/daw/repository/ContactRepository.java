@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
     
-    
+    //En el futuro podríamos poner más validaciones, etc
 }
