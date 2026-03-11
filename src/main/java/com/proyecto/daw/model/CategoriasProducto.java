@@ -29,6 +29,7 @@ import lombok.ToString;
 @EqualsAndHashCode(exclude = "productos")  
 @Entity
 @Table(name="categorias_producto")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 public class CategoriasProducto implements Serializable {
     
     @Id

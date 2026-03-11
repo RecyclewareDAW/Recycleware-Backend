@@ -28,6 +28,7 @@ import lombok.ToString;
 @EqualsAndHashCode(exclude = {"estado", "categoria"})  // Excluir de equals y hashCode para evitar recursividad
 @Entity
 @Table(name = "productos")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 public class Producto implements Serializable {
 
     @Id
@@ -58,4 +59,9 @@ public class Producto implements Serializable {
     @Size(min = 1, max = 500, message = "El tamaño máximo de la url de la imagen es de 500 carácteres")
     @Column(name = "imagen_url")
     private String imagenUrl;
+
+    
+    public String toJsonSimple() {
+        return "{ \"nombre\"=" + nombre + ", \"categoria\"=" + categoria.getNombre() + ", \"estado\"=" + estado.getNombre() + ", \"imagen\"=" + imagenUrl + '}';
+    }
 }

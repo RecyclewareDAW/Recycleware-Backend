@@ -25,3 +25,5 @@ INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, pro
 VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '1234', 'Calle Falsa 123', 'Alicante', '03001');
 INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, provincia, codigo_postal)
 VALUES ('Admin2', '12345675X', '600111222', 'admin@recyclee.com', '1234', 'Calle Falsa 123', 'Alicante', '03001');
+INSERT INTO productos(nombre, id_categoria, id_estado, descripcion, imagen_url)
+VALUES ('Ratón Acer OMW', 1, 1, 'Ratón apenas usado con dos botones laterales y boton de cambio de DPI', 'https://placehold.co/600x400/orange/white');
