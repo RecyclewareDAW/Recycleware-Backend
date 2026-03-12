@@ -92,7 +92,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
-        // si todo esta ok
+        // si esta ok
         response.put("mensaje", "Login exitoso");
         response.put("usuario", user);
 
