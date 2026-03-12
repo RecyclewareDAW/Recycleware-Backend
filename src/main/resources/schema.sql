@@ -10,17 +10,18 @@ DROP TABLE IF EXISTS categorias_producto;
 DROP TABLE IF EXISTS usuarios;
 
 CREATE TABLE usuarios (
-    id INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    dni VARCHAR(9) NOT NULL UNIQUE,
-    telefono VARCHAR(15) NOT NULL,
-    correo VARCHAR(100) NOT NULL UNIQUE,
-    contraseña VARCHAR(255) NOT NULL,
-    direccion VARCHAR(200) NOT NULL,
-    provincia VARCHAR(100) NOT NULL,
-    codigo_postal VARCHAR(10) NOT NULL,
-    razon_social VARCHAR(100) DEFAULT NULL,
-    nombre_contacto VARCHAR(100) DEFAULT NULL,
+    id              INT         NOT NULL AUTO_INCREMENT,
+    nombre          VARCHAR(80) NOT NULL,
+    dni             VARCHAR(9)  NOT NULL UNIQUE,
+    telefono        VARCHAR(15) NOT NULL,
+    correo          VARCHAR(80) NOT NULL UNIQUE,
+    contrasenia     VARCHAR(80) NOT NULL,
+    direccion       VARCHAR(80) NOT NULL,
+    provincia       VARCHAR(80) NOT NULL,
+    codigo_postal   VARCHAR(10) NOT NULL,
+    razon_social    VARCHAR(80) DEFAULT NULL,
+    nombre_contacto VARCHAR(80) DEFAULT NULL,
+    rol             VARCHAR(20) NOT NULL DEFAULT 'PARTICULAR',
     PRIMARY KEY (id)
 );
 

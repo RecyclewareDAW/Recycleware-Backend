@@ -31,12 +31,14 @@ INSERT INTO estados_donacion (nombre) VALUES
 ('Recibido'), 
 ('Procesado');
 
--- Un usuario de prueba (contraseña: 1234)
-INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, provincia, codigo_postal)
-VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '1234', 'Calle Falsa 123', 'Alicante', '03001');
-INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, provincia, codigo_postal)
-VALUES ('Admin2', '12345675X', '600111222', 'admin@recyclee.com', '1234', 'Calle Falsa 123', 'Alicante', '03001');
-INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, provincia, codigo_postal, razon_social, nombre_contacto)
-VALUES ('Bela', '12345635X', '600111222', 'bela@recyclee.com', '1234', 'Calle Falsa 123', 'Alicante', '03001', 'Belita SL', 'Yo');
+-- Usuarios de prueba (contraseña: 123456789 o 987654321)
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, provincia, codigo_postal, rol)
+VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '12345678', 'Calle Falsa 123', 'Alicante', '03001', 'ADMIN');
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, provincia, codigo_postal, razon_social, nombre_contacto, rol)
+VALUES ('Empresa', '12345635X', '600111222', 'empresa@recycleware.com', '12345678', 'Calle empresa 10', 'Alicante', '03001', 'Recycleware SL', 'Recycle', 'EMPRESA');
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, provincia, codigo_postal, rol)
+VALUES ('Particular', '12345675X', '600111222', 'particular@ejemplo.com', '987654321', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
+
+-- Productos
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
 VALUES ('Ratón Acer OMW', 1, 1, 1, 'Ratón apenas usado con dos botones laterales y boton de cambio de DPI', 'https://placehold.co/600x400/orange/white');
