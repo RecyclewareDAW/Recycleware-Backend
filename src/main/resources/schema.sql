@@ -53,16 +53,24 @@ CREATE TABLE productos (
     FOREIGN KEY (id_estado) REFERENCES estados_producto(id)
 );
 
+CREATE TABLE estados_donacion (
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(45) NOT NULL, -- Ej: 'Pendiente', 'En Recogida', 'Recibida', 'Procesada'
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE donaciones (
     id INT NOT NULL AUTO_INCREMENT,
-    id_donante INT NOT NULL,
+    id_donante INT,
+    id_estado INT NOT NULL DEFAULT 1,
     fecha_donacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     cantidad_productos INT DEFAULT 1,
     descripcion TEXT NOT NULL,
     peso FLOAT NULL,
     volumen FLOAT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_donante) REFERENCES usuarios(id)
+    FOREIGN KEY (id_donante) REFERENCES usuarios(id),
+    FOREIGN KEY (id_estado) REFERENCES estados_donacion(id)
 );
 
 CREATE TABLE solicitudes (

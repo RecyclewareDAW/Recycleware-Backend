@@ -20,6 +20,13 @@ INSERT INTO estados_solicitud (nombre) VALUES ('Aprobada');
 INSERT INTO estados_solicitud (nombre) VALUES ('Denegada');
 INSERT INTO estados_solicitud (nombre) VALUES ('Entregada');
 
+-- Estados de la donación registrada
+INSERT INTO estados_donacion (nombre) VALUES 
+('Pendiente'), 
+('En Recogida'), 
+('Recibido'), 
+('Procesado');
+
 -- Un usuario de prueba (contraseña: 1234)
 INSERT INTO usuarios (nombre, dni, telefono, correo, contraseña, direccion, provincia, codigo_postal)
 VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '1234', 'Calle Falsa 123', 'Alicante', '03001');
