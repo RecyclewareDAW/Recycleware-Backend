@@ -65,16 +65,24 @@ CREATE TABLE productos (
     FOREIGN KEY (id_disponibilidad) REFERENCES disponibilidad_producto(id)
 );
 
+CREATE TABLE estados_donacion (
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(45) NOT NULL, -- Ej: 'Pendiente', 'En Recogida', 'Recibida', 'Procesada'
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE donaciones (
     id INT NOT NULL AUTO_INCREMENT,
-    id_donante INT NOT NULL,
-    fecha_donacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    id_donante INT,
+    id_estado INT NOT NULL DEFAULT 1,
+    fecha_donacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     cantidad_productos INT DEFAULT 1,
     descripcion TEXT NOT NULL,
     peso FLOAT NULL,
     volumen FLOAT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_donante) REFERENCES usuarios(id)
+    FOREIGN KEY (id_donante) REFERENCES usuarios(id),
+    FOREIGN KEY (id_estado) REFERENCES estados_donacion(id)
 );
 
 CREATE TABLE solicitudes (
@@ -83,7 +91,7 @@ CREATE TABLE solicitudes (
     id_producto INT NOT NULL,
     motivo TEXT NOT NULL,
     id_estado INT NOT NULL DEFAULT 1,
-    fecha_solicitud DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (id_solicitante) REFERENCES usuarios(id),
     FOREIGN KEY (id_producto) REFERENCES productos(id),
@@ -96,7 +104,7 @@ CREATE TABLE mensajes_contacto (
     correo VARCHAR(100) NOT NULL,
     mensaje TEXT NOT NULL,
     id_usuario INT NULL,
-    fecha_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );

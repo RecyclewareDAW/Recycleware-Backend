@@ -35,5 +35,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT * FROM usuarios WHERE UPPER(nombre) LIKE UPPER(CONCAT('%', :cadena, '%')) OR UPPER(razon_social) LIKE UPPER(CONCAT('%', :cadena, '%'))", nativeQuery = true)
     List<User> findByNameContaining(@Param("cadena") String name);
 
-    
+    // para que Spring Boot cree el SQL automáticamente: SELECT * FROM usuarios WHERE correo = ?
+    User findByCorreo(String correo);
 }
