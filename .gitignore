@@ -35,3 +35,5 @@ build/
 # Ignorar base de datos local H2
 data/
 *.db
+/data/
+/${project.build.directory}/
