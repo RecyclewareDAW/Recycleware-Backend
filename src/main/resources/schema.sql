@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS donaciones;
 DROP TABLE IF EXISTS productos;
 DROP TABLE IF EXISTS estados_solicitud;
 DROP TABLE IF EXISTS estados_producto;
+DROP TABLE IF EXISTS disponibilidad_producto;
 DROP TABLE IF EXISTS categorias_producto;
 DROP TABLE IF EXISTS usuarios;
 
@@ -35,22 +36,33 @@ CREATE TABLE estados_producto (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE disponibilidad_producto (
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(45) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
 CREATE TABLE estados_solicitud (
     id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(45) NOT NULL,
     PRIMARY KEY (id)
 );
 
+
+
 CREATE TABLE productos (
     id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     id_categoria INT NOT NULL,
     id_estado INT NOT NULL,
+    id_disponibilidad INT NOT NULL,
     descripcion TEXT NOT NULL,
     imagen_url VARCHAR(500) NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_categoria) REFERENCES categorias_producto(id),
-    FOREIGN KEY (id_estado) REFERENCES estados_producto(id)
+    FOREIGN KEY (id_estado) REFERENCES estados_producto(id),
+    FOREIGN KEY (id_disponibilidad) REFERENCES disponibilidad_producto(id)
 );
 
 CREATE TABLE donaciones (

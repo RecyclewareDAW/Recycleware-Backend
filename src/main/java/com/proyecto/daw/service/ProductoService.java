@@ -6,7 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.proyecto.daw.model.CategoriasProducto;
+import com.proyecto.daw.model.DisponibilidadProducto;
 import com.proyecto.daw.model.Producto;
+import com.proyecto.daw.repository.CategoriasProductoRepository;
+import com.proyecto.daw.repository.DisponibilidadProductoRepository;
 import com.proyecto.daw.repository.ProductoRepository;
 
 @Service
@@ -14,6 +18,9 @@ public class ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+
+    
 
     public List<Producto> findAll() {
         return productoRepository.findSqlAll();
@@ -24,22 +31,27 @@ public class ProductoService {
     }
 
     public List<Producto> findByCategoriaString(String categoria) {
-        List<Producto> lista = new ArrayList<Producto>();
-        for (Producto producto : productoRepository.findAll()) {
-            if (producto.getCategoria().getNombre().equals(categoria)) {
+        List<Producto> lista = productoRepository.findAll();
+        
+        for (Producto producto : lista) {
+            if (producto.getCategoria().getNombre() == categoria) {
                 lista.add(producto);
             }
         }
         return lista;
     }
 
-    public List<Producto> findByEstadpString(String estado) {
+    public List<Producto> findByEstadoString(String estado) {
+        return null;
+    }
+
+    public List<Producto> findAllDisponibles(){
         List<Producto> lista = new ArrayList<Producto>();
         for (Producto producto : productoRepository.findAll()) {
-            if (producto.getEstado().getNombre().equals(estado)) {
+            if (producto.getDisponibilidad().g) {
                 lista.add(producto);
             }
-        }
+        }       
         return lista;
     }
 

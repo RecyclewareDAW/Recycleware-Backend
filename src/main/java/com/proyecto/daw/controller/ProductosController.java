@@ -11,6 +11,7 @@ import com.proyecto.daw.model.Producto;
 import com.proyecto.daw.service.ProductoService;
 
 
+
 @RequestMapping("/productos")
 
 @RestController
@@ -23,6 +24,12 @@ public class ProductosController {
     public List<Producto> showProductos() {
         return productoService.findAll();
     }
+
+    @GetMapping("/disponibles")
+    public List<Producto> showProductosDisponibles() {
+        return productoService.findAllDisponibles();
+    }
+    
 
     @GetMapping("/{id}")
     public Producto showProductoById(@PathVariable int id){

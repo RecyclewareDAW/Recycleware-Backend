@@ -51,6 +51,11 @@ public class Producto implements Serializable {
     @JsonIgnoreProperties("productos")  
     private EstadosProducto estado;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_disponibilidad", referencedColumnName = "id")
+    @JsonIgnoreProperties("productos")  
+    private DisponibilidadProducto disponibilidad;
+
     @NotBlank(message = "El producto necesita una descripcion")
     @Size(min = 1, max = 200, message = "El tamaño máximo de la descripción de un producto es de 200 carácteres")
     @Column(name = "descripcion", nullable = false)
@@ -59,9 +64,4 @@ public class Producto implements Serializable {
     @Size(min = 1, max = 500, message = "El tamaño máximo de la url de la imagen es de 500 carácteres")
     @Column(name = "imagen_url")
     private String imagenUrl;
-
-    
-    public String toJsonSimple() {
-        return "{ \"nombre\"=" + nombre + ", \"categoria\"=" + categoria.getNombre() + ", \"estado\"=" + estado.getNombre() + ", \"imagen\"=" + imagenUrl + '}';
-    }
 }
