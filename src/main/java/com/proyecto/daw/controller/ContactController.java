@@ -58,6 +58,7 @@ public class ContactController {
     }
 
     
+    //Mapeo para acceder al endpoint de TODOS los mensajes
     @GetMapping("/todos")
     public ResponseEntity<List<Contact>> getAllMessages() {
         List<Contact> mensajes = contactService.obtenerTodos();

@@ -12,13 +12,15 @@ public class ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
+    // Guardo el mensaje en la BDD
     public Contact guardarMensaje(Contact contacto) {
         return contactRepository.save(contacto);
     }
 
+    // Accedo a BDD y saco una lista de todos los mensajes
     public List<Contact> obtenerTodos() {
         return contactRepository.findAll();
     }
 
-    
+
 }
