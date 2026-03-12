@@ -4,14 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "usuarios") // Nombre exacto de la tabla
+@Table(name = "usuarios") // Nombre de la tabla
 @Data 
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 80)
     private String nombre;
 
     @Column(nullable = false, length = 9, unique = true)
@@ -20,24 +20,28 @@ public class User {
     @Column(nullable = false, length = 15)
     private String telefono;
 
-    @Column(nullable = false, length = 100, unique = true)
+    @Column(nullable = false, length = 80, unique = true)
     private String correo;
 
-    @Column(name = "contraseña", nullable = false, length = 255)
+    @Column(name = "contrasenia", nullable = false, length = 80)
     private String password;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 80)
     private String direccion;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 80)
     private String provincia;
 
     @Column(name = "codigo_postal", nullable = false, length = 10)
     private String codigoPostal;
 
-    @Column(name = "razon_social", length = 100)
+    @Column(name = "razon_social", length = 80)
     private String razonSocial;
 
-    @Column(name = "nombre_contacto", length = 100)
+    @Column(name = "nombre_contacto", length = 80)
     private String nombreContacto;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private Rol rol;
 }

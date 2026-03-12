@@ -15,6 +15,26 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> findAll() {
-        return userRepository.findSqlAll();
+        return userRepository.findAll();
+    }
+
+    public User findById(int id) {
+        return userRepository.findById(id);
+    }
+
+    public Long count() {
+        return userRepository.count();
+    }
+
+    public List<User> findByNameContaining(String name) {
+        return userRepository.findByNameContaining(name);
+    }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public User findByCorreo(String correo) {
+        return userRepository.findByCorreo(correo);
     }
 }
