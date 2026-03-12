@@ -30,6 +30,9 @@ public interface EstadosProductoRepository extends JpaRepository<EstadosProducto
      */
 
 
-    @Query(value = "SELECT nombre FROM estado_producto", nativeQuery = true)
+    @Query(value = "SELECT nombre FROM estados_producto", nativeQuery = true)
     List<String> findAllNames(); 
+
+    @Query(value = "SELECT * FROM estados_producto WHERE id = :id ", nativeQuery = true)
+    EstadosProducto findSqlById(@Param("id") int id);
 }

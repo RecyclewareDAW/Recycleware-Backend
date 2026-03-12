@@ -6,11 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proyecto.daw.model.CategoriasProducto;
-import com.proyecto.daw.model.DisponibilidadProducto;
 import com.proyecto.daw.model.Producto;
-import com.proyecto.daw.repository.CategoriasProductoRepository;
-import com.proyecto.daw.repository.DisponibilidadProductoRepository;
 import com.proyecto.daw.repository.ProductoRepository;
 
 @Service
@@ -48,7 +44,7 @@ public class ProductoService {
     public List<Producto> findAllDisponibles(){
         List<Producto> lista = new ArrayList<Producto>();
         for (Producto producto : productoRepository.findAll()) {
-            if (producto.getDisponibilidad().g) {
+            if (producto.getDisponibilidad().getId() == 1) {
                 lista.add(producto);
             }
         }       
