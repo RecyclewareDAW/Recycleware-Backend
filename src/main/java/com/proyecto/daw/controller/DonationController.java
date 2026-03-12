@@ -28,9 +28,17 @@ public class DonationController {
         return donationService.findByUserId(userId);
     }
 
+    // Crear nueva donación
     @PostMapping
     public Donation create(@RequestBody Donation donation) {
         return donationService.save(donation);
+    }
+
+    // Editar Estado de la donación (Con un desplegable para elegir estado)
+    @PutMapping("/{id}/status")
+    public Donation updateStatus(@PathVariable Integer id, @RequestBody java.util.Map<String, Integer> body) {
+        Integer newStateId = body.get("idEstado");
+        return donationService.updateStatus(id, newStateId);
     }
 
     @DeleteMapping("/{id}")

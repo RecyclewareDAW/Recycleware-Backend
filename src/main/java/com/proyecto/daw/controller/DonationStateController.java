@@ -23,8 +23,8 @@ public class DonationStateController {
         return donationStateRepository.findAll();
     }
 
-    // 2. Obtener un estado por ID (Usando tu sistema de excepciones)
-    // GET http://localhost:8080/api/donation-states/1
+    // 2. Obtener un estado por ID
+    // GET http://localhost:8080/api/donation-states/1  ---> esto me permite hacer un desplegable para poner el estado en la donación (pendiente, tal)
     @GetMapping("/{id}")
     public DonationState getById(@PathVariable Integer id) {
         return donationStateRepository.findById(id)

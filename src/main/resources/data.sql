@@ -39,6 +39,8 @@ INSERT INTO estados_donacion (id, nombre) VALUES (4, 'Procesado');
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso, volumen)
 VALUES (1, 1, 5, 'Lote de monitores antiguos', 15.5, 0.8);
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso, volumen)
-VALUES (1, 2, 2, 'Servidor de rack para desguace', 40.0, 1.2);
+VALUES (3, 2, 2, 'Servidor de rack para desguace', 40.0, 1.2);
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso, volumen)
 VALUES (1, 3, 10, 'Caja con teclados y ratones varios', 5.0, 0.3);
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso, volumen)
+VALUES (null, 3, 10, 'Caja con teclados y ratones varios', 5.0, 0.3);
