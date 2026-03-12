@@ -7,21 +7,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.daw.model.User;
 import com.proyecto.daw.service.UserService;
 
 import jakarta.validation.Valid;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 @RequestMapping("/users")
-
+@CrossOrigin
 @RestController
 public class UserController {
     
@@ -78,5 +72,30 @@ public class UserController {
         return response;
     }
 
-    
+    // LOGIN DE USUARIO
+    @PostMapping("/login")
+    // lo que enviamos desde el login lo guardamos en un map llamado credenciales para utilizarlo
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, String> credenciales) {
+        String correo = credenciales.get("email");
+        String password = credenciales.get("password");
+
+        // creamos un nuevo mapa para guardar la respuesta
+        Map<String, Object> response = new HashMap<>();
+
+        // buscamos al usuario por su correo
+        User user = userService.findByCorreo(correo);
+
+        // comprobamos si el usuario y la contraseña son correctos
+        if (user == null || !user.getPassword().equals(password)) {
+            response.put("error", "Correo o contraseña incorrectos");
+            // devolvemos 401 Unauthorized
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+
+        // si todo esta ok
+        response.put("mensaje", "Login exitoso");
+        response.put("usuario", user);
+
+        return ResponseEntity.ok(response);
+    }
 }
