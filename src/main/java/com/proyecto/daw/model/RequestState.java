@@ -25,10 +25,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString(exclude = "requests") // Actualizado al inglés
-@EqualsAndHashCode(exclude = "requests") // Actualizado al inglés
+@ToString(exclude = "requests") 
+@EqualsAndHashCode(exclude = "requests") 
 @Entity
-@Table(name = "estados_solicitud") // ¡Importante! Mantenemos el nombre de tu tabla de H2
+@Table(name = "estados_solicitud") 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class RequestState implements Serializable {
 
@@ -40,9 +40,9 @@ public class RequestState implements Serializable {
     @NotBlank(message = "El estado necesita un nombre")
     @Size(min = 1, max = 45, message = "El tamaño máximo del nombre de un estado es de 45 carácteres")
     @Column(name = "nombre", nullable = false, unique = true)
-    private String name; // Variable en inglés, pero mapeada a la columna "nombre"
+    private String name; 
 
-    // Relación inversa con la futura clase Request
+    
     @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("state")
     private Set<Request> requests;
