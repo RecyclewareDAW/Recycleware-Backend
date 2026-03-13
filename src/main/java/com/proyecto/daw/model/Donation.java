@@ -33,5 +33,4 @@ public class Donation {
     private String descripcion;
 
     private Float peso;
-    private Float volumen;
 }

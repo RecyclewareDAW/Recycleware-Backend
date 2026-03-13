@@ -81,7 +81,6 @@ CREATE TABLE donaciones (
     cantidad_productos INT DEFAULT 1,
     descripcion TEXT NOT NULL,
     peso FLOAT NULL,
-    volumen FLOAT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_donante) REFERENCES usuarios(id),
     FOREIGN KEY (id_estado) REFERENCES estados_donacion(id)
