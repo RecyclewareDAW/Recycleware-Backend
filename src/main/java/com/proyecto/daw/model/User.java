@@ -30,7 +30,7 @@ public class User {
     private String direccion;
 
     @Column(nullable = false, length = 80)
-    private String provincia;
+    private String localidad;
 
     @Column(name = "codigo_postal", nullable = false, length = 10)
     private String codigoPostal;
