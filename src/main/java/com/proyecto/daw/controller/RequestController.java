@@ -19,7 +19,6 @@ import com.proyecto.daw.service.RequestService;
 
 @RestController
 @RequestMapping("/solicitudes")
-@CrossOrigin(origins = "*") 
 public class RequestController {
 
     @Autowired
