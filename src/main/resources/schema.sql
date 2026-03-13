@@ -18,7 +18,7 @@ CREATE TABLE usuarios (
     correo          VARCHAR(80) NOT NULL UNIQUE,
     contrasenia     VARCHAR(80) NOT NULL,
     direccion       VARCHAR(80) NOT NULL,
-    provincia       VARCHAR(80) NOT NULL,
+    localidad       VARCHAR(80) NOT NULL,
     codigo_postal   VARCHAR(10) NOT NULL,
     razon_social    VARCHAR(80) DEFAULT NULL,
     nombre_contacto VARCHAR(80) DEFAULT NULL,

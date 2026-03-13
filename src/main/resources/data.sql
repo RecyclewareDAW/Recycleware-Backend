@@ -25,11 +25,11 @@ INSERT INTO estados_solicitud (nombre) VALUES ('Denegada');
 INSERT INTO estados_solicitud (nombre) VALUES ('Entregada');
 
 -- Usuarios de prueba (contraseña: 123456789 o 987654321)
-INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, provincia, codigo_postal, rol)
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
 VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '12345678', 'Calle Falsa 123', 'Alicante', '03001', 'ADMIN');
-INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, provincia, codigo_postal, razon_social, nombre_contacto, rol)
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
 VALUES ('Empresa', '12345635X', '600111222', 'empresa@recycleware.com', '12345678', 'Calle empresa 10', 'Alicante', '03001', 'Recycleware SL', 'Recycle', 'EMPRESA');
-INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, provincia, codigo_postal, rol)
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
 VALUES ('Particular', '12345675X', '600111222', 'particular@ejemplo.com', '987654321', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
 
 -- Productos
