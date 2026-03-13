@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS productos;
 DROP TABLE IF EXISTS estados_solicitud;
 DROP TABLE IF EXISTS estados_producto;
 DROP TABLE IF EXISTS disponibilidad_producto;
+DROP TABLE IF EXISTS estados_donacion;
 DROP TABLE IF EXISTS categorias_producto;
 DROP TABLE IF EXISTS usuarios;
 
@@ -68,7 +69,7 @@ CREATE TABLE productos (
 
 CREATE TABLE estados_donacion (
     id INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(45) NOT NULL, -- Ej: 'Pendiente', 'En Recogida', 'Recibida', 'Procesada'
+    nombre VARCHAR(45) NOT NULL,
     PRIMARY KEY (id)
 );
 
