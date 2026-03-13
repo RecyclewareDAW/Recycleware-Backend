@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/donation-states")
-@CrossOrigin(origins = "http://localhost:3000")
 public class DonationStateController {
 
     @Autowired
