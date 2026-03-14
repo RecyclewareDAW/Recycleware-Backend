@@ -21,7 +21,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/contacto")
-@CrossOrigin(origins = "*") // Permite peticiones desde React (CORS)
 public class ContactController {
 
     @Autowired
