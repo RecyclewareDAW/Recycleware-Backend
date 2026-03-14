@@ -24,7 +24,7 @@ public class RequestController {
     @Autowired
     private RequestService requestService;
 
-    // 1. ENDPOINT PARA EL ADMIN: Ver todas las solicitudes
+    // 1. ENDPOINT PARA EL ADMIN: Ver todas las solicitudes pendientes o totales
     @GetMapping("/todas")
     public ResponseEntity<List<Request>> getAllRequests() {
         List<Request> requests = requestService.findAll();
