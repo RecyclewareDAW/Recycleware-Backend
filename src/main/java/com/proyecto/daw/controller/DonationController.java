@@ -27,6 +27,11 @@ public class DonationController {
         return donationService.findByUserId(userId);
     }
 
+    @GetMapping("/ranking")
+    public List<Object[]> getRankingEmpresas() {
+        return donationService.obtenerRankingEmpresas();
+    }
+
     // Crear nueva donación
     @PostMapping
     public Donation create(@RequestBody Donation donation) {

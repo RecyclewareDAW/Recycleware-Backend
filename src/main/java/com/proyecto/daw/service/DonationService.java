@@ -40,6 +40,10 @@ public class DonationService {
         return donationRepository.findByDonanteId(userId);
     }
 
+    public List<Object[]> obtenerRankingEmpresas() {
+        return donationRepository.findRankingEmpresas();
+    }
+
     // Guardar (Crear o Actualizar)
     @Transactional
     public Donation save(Donation donation) {
