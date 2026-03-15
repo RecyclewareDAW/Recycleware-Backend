@@ -51,10 +51,50 @@ INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, loc
 VALUES ('Bela emproesa 4', '12355035X', '600111222', 'bela@empresa4.com', '1234', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa cuarta', 'Recycle', 'EMPRESA');
 
 
-
--- Productos
+------------------------------------------------------
+-- Productos------------------------------------------
+------------------------------------------------------
+    
+    -- Periféricos
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
 VALUES ('Ratón Acer OMW', 1, 1, 1, 'Ratón apenas usado con dos botones laterales y boton de cambio de DPI', 'https://placehold.co/600x400/orange/white');
+
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Altavoz MiFa', 1, 2, 1, 'Altavoz con uso visible pero completamente funcional', 'https://placehold.co/600x400/green/white');
+
+    
+    -- Sobremesa
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Torre PCGAM Slim', 3, 1, 1, 'Intel I3 16RAM 120 SSD', 'https://thumb.pccomponentes.com/w-530-530/articles/1083/10837879/1830-pcgam-oficina-madrid-slim-intel-core-i3-10100-16gb-500gb-ssd.jpg');
+
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Torre dañada Nox', 3, 4, 1, 'Torre rota que se desconoce por que no arranca y antiguo', 'https://placehold.co/400x600/red/black');
+
+    
+    -- Componentes
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Procesador AMD Ryzen 2600', 4, 1, 2, 'Procesador con apenas uso', 'https://placehold.co/600x600/blue/white');
+
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Fuente alimentación Tempest Pulse', 4, 2, 1, 'Fuente con varios años de uso pero todavía funcional ni indicios de estropearse', 'https://placehold.co/600x400/red/black');
+
+    
+    -- Monitores
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Monitor Dell Pro 22', 5, 1, 1, 'Monitor Dell de una oficinia que pese al uso esta en buen estado todavía', 'https://placehold.co/600x600/blue/white');
+
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Monitor VSDISPLAY LCD', 5, 3, 1, 'Monitor de 4:3 con varias franjas verticales negras aún todavia funcional', 'https://placehold.co/600x400/red/black');
+
+    
+    -- Portatiles
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Portatil HP Pavilion', 2, 1, 1, 'AMD A4 4GB Ram 50Gb hdd', 'https://placehold.co/600x600/blue/white');
+
+INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
+VALUES ('Portatil HP 255 G5', 2, 1, 1, '16Gb Ram 400 Gb Hdd', 'https://placehold.co/600x400/red/black');
+
+
 
 -- Estados de donaciones
 INSERT INTO estados_donacion (id, nombre) VALUES (1, 'Pendiente');
