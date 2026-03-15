@@ -15,7 +15,6 @@ import com.proyecto.daw.service.UserService;
 import jakarta.validation.Valid;
 
 @RequestMapping("/users")
-@CrossOrigin
 @RestController
 public class UserController {
     
@@ -97,5 +96,15 @@ public class UserController {
         response.put("usuario", user);
 
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping
+    public ResponseEntity<User> actualizarUsuario(@RequestBody User usuarioActualizado) {
+        User usuarioGuardado = userService.actualizarUsuario(usuarioActualizado);
+        // Si el Service nos devuelve null, es que no existía (Error 404)
+        if (usuarioGuardado == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuarioGuardado);
     }
 }

@@ -37,4 +37,12 @@ public class UserService {
     public User findByCorreo(String correo) {
         return userRepository.findByCorreo(correo);
     }
+
+    public User actualizarUsuario(User usuarioActualizado) {
+        // Comprobamos si existe
+        if (!userRepository.existsById(usuarioActualizado.getId())) {
+            return null;
+        }
+        return userRepository.save(usuarioActualizado);
+    }
 }
