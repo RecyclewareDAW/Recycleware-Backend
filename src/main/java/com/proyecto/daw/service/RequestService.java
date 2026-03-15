@@ -57,4 +57,9 @@ public class RequestService {
         // La guardamos en H2 y devolvemos el resultado
         return requestRepository.save(nuevaSolicitud);
     }
+
+    // 3. Método para el USUARIO: Ver solo sus solicitudes
+    public List<Request> obtenerSolicitudesPorUsuario(int idSolicitante) {
+        return requestRepository.findByApplicantId(idSolicitante);
+    }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.proyecto.daw.model.Request;
 import com.proyecto.daw.service.RequestService;
@@ -66,5 +67,12 @@ public class RequestController {
             response.put("error", "Error al procesar los datos de la solicitud. Revisa el formato.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+    }
+
+    // 3. ENDPOINT PARA EL USUARIO: Traer solo SUS solicitudes
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<List<Request>> getRequestsByUser(@PathVariable("id") int id) {
+        List<Request> misSolicitudes = requestService.obtenerSolicitudesPorUsuario(id);
+        return ResponseEntity.status(HttpStatus.OK).body(misSolicitudes);
     }
 }
