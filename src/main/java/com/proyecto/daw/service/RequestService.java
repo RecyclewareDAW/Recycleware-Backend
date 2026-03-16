@@ -62,4 +62,24 @@ public class RequestService {
     public List<Request> obtenerSolicitudesPorUsuario(int idSolicitante) {
         return requestRepository.findByApplicantId(idSolicitante);
     }
+
+    // 4. Método para el ADMIN: Actualizar el estado de una solicitud
+    public Request updateStatus(int idSolicitud, int idNuevoEstado) {
+        
+        // 1. Buscamos la solicitud en la base de datos
+        Request solicitud = requestRepository.findById(idSolicitud).orElse(null);
+        if (solicitud == null) {
+            throw new IllegalArgumentException("Error: No se ha encontrado la solicitud con ID " + idSolicitud);
+        }
+
+        // 2. Buscamos el nuevo estado que nos han pedido
+        RequestState nuevoEstado = requestStateRepository.findById(idNuevoEstado).orElse(null);
+        if (nuevoEstado == null) {
+            throw new IllegalArgumentException("Error: No se ha encontrado el estado con ID " + idNuevoEstado);
+        }
+
+        // 3. Actualizamos y guardamos
+        solicitud.setState(nuevoEstado);
+        return requestRepository.save(solicitud);
+    }
 }

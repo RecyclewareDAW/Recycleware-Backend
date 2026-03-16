@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -74,5 +75,37 @@ public class RequestController {
     public ResponseEntity<List<Request>> getRequestsByUser(@PathVariable("id") int id) {
         List<Request> misSolicitudes = requestService.obtenerSolicitudesPorUsuario(id);
         return ResponseEntity.status(HttpStatus.OK).body(misSolicitudes);
+    }
+
+    // 4. ENDPOINT PARA EL ADMIN: Cambiar el estado de la solicitud
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateRequestStatus(@PathVariable("id") int id, @RequestBody Map<String, Integer> body) {
+        try {
+            // Extremos el ID del nuevo estado del JSON que mande React
+            Integer newStateId = body.get("idEstado");
+            
+            if (newStateId == null) {
+                Map<String, String> errorResponse = new HashMap<>();
+                errorResponse.put("error", "El campo 'idEstado' es obligatorio.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+            }
+
+            // Llamamos al servicio para que haga la actualización
+            Request solicitudActualizada = requestService.updateStatus(id, newStateId);
+            
+            // Devolvemos la solicitud ya actualizada
+            return ResponseEntity.status(HttpStatus.OK).body(solicitudActualizada);
+
+        } catch (IllegalArgumentException e) {
+            // Si no encuentra la solicitud o el estado, devuelve 404
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+            
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Error interno al intentar actualizar el estado.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
 }
