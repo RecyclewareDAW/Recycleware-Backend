@@ -92,4 +92,26 @@ public class DonationService {
         Donation donation = findById(id); // Si no existe, lanza la excepción
         donationRepository.delete(donation);
     }
+
+    // Ultima donación
+    public java.util.Map<String, Object> obtenerUltimaDonacionFormateada() {
+        Donation ultima = donationRepository.findTopByOrderByFechaDonacionDesc();
+
+        if (ultima == null) {
+            return null;
+        }
+
+        java.util.Map<String, Object> respuesta = new java.util.HashMap<>();
+
+        // Comprobamos si el donante tiene Razón Social (Empresa) o usamos su Nombre (Particular)
+        String nombreDonante = ultima.getDonante().getRazonSocial() != null ?
+                ultima.getDonante().getRazonSocial() :
+                ultima.getDonante().getNombre();
+
+        respuesta.put("donante", nombreDonante);
+        respuesta.put("cantidad", ultima.getCantidadProductos());
+        respuesta.put("categoria", ultima.getDescripcion());
+
+        return respuesta;
+    }
 }

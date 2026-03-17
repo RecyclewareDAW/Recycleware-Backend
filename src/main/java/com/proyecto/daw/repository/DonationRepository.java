@@ -21,4 +21,6 @@ public interface DonationRepository extends JpaRepository<Donation, Integer> {
             "GROUP BY d.donante.id, d.donante.razonSocial " +
             "ORDER BY SUM(d.cantidadProductos) DESC")
     List<Object[]> findRankingEmpresas();
+
+    Donation findTopByOrderByFechaDonacionDesc();
 }

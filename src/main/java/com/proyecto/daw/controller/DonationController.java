@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/donations")
+@RequestMapping("/donaciones")
 public class DonationController {
     @Autowired
     private DonationService donationService;
@@ -30,6 +30,16 @@ public class DonationController {
     @GetMapping("/ranking")
     public List<Object[]> getRankingEmpresas() {
         return donationService.obtenerRankingEmpresas();
+    }
+
+    @GetMapping("/ultima")
+    public org.springframework.http.ResponseEntity<java.util.Map<String, Object>> getLatestDonation() {
+        java.util.Map<String, Object> response = donationService.obtenerUltimaDonacionFormateada();
+
+        if (response != null) {
+            return org.springframework.http.ResponseEntity.ok(response);
+        }
+        return org.springframework.http.ResponseEntity.notFound().build();
     }
 
     // Crear nueva donación
