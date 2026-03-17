@@ -78,8 +78,16 @@ public class RequestService {
             throw new IllegalArgumentException("Error: No se ha encontrado el estado con ID " + idNuevoEstado);
         }
 
+        // Marcamos el producto de la solicitud como no disponible si se aprueba la solicitud
+        if (nuevoEstado.getName() == "Aprobada") {
+            productoService.marcarProductoNoDisponibleById(solicitud.getProduct().getId());
+        }
+
         // 3. Actualizamos y guardamos
         solicitud.setState(nuevoEstado);
+
+
+
         return requestRepository.save(solicitud);
     }
 }

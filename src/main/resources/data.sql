@@ -15,7 +15,7 @@ INSERT INTO estados_producto (nombre) VALUES ('Para Piezas');
 
 -- Disponibilidad de producto
 INSERT INTO disponibilidad_producto (nombre) VALUES ('Disponible');
-INSERT INTO disponibilidad_producto (nombre) VALUES ('Reservado');
+INSERT INTO disponibilidad_producto (nombre) VALUES ('No Disponible');
 
 -- Estados de la gestión de solicitudes
 INSERT INTO estados_solicitud (nombre) VALUES ('Pendiente');
