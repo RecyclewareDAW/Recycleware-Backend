@@ -109,3 +109,13 @@ CREATE TABLE mensajes_contacto (
     PRIMARY KEY (id),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
+
+CREATE TABLE resenas (
+    id INT NOT NULL AUTO_INCREMENT,
+    texto TEXT NOT NULL,
+    autor VARCHAR(80) NOT NULL,
+    rol VARCHAR(45) NOT NULL, -- 'Beneficiario', 'Empresa Donante'
+    estrellas INT DEFAULT 5,
+    activa BOOLEAN DEFAULT TRUE, -- Para que el admin pueda ocultar reseñas inapropiadas
+    PRIMARY KEY (id)
+);

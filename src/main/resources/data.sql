@@ -182,3 +182,44 @@ VALUES (4, 6, 'La fuente de mi ordenador se quemó tras una subida de tensión y
 -- Estado: 4 (Denegada)
 INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
 VALUES (4, 4, 'Me gustaría obtener esta torre para practicar soldadura y reparación de placas base.', 4);
+
+
+------------------------------------------------------
+-- Usuarios y Comentarios para mostrar en la parte de comunidad (Ricardo) -------
+------------------------------------------------------
+
+-- USUARIOS FICTICIOS (6 PARTICULARES / BENEFICIARIOS)
+
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol) VALUES
+    ('Carlos Martínez', '11111111A', '600111222', 'carlos@mail.com', '12345678', 'Calle Mayor 12, 3B', 'Alicante', '03002', 'PARTICULAR'),
+    ('Laura Gómez', '22222222B', '600222333', 'laura@mail.com', '12345678', 'Avenida Libertad 45', 'San Vicente del Raspeig', '03690', 'PARTICULAR'),
+    ('Ahmed Ruiz', '33333333C', '600333444', 'ahmed@mail.com', '12345678', 'Plaza de los Luceros 1', 'Alicante', '03001', 'PARTICULAR'),
+    ('Sofía Navarro', '44444444D', '600444555', 'sofia@mail.com', '12345678', 'Calle del Sol 8', 'Mutxamel', '03110', 'PARTICULAR'),
+    ('David López', '55555555E', '600555666', 'david@mail.com', '12345678', 'Avenida Costa Blanca 120', 'San Juan Playa', '03540', 'PARTICULAR'),
+    ('Elena Torres', '66666666F', '600666777', 'elena@mail.com', '12345678', 'Calle San Fernando 33', 'Alicante', '03005', 'PARTICULAR');
+
+-- USUARIOS FICTICIOS (6 EMPRESAS / DONANTES)
+
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol) VALUES
+    ('TechCorp Solutions', 'B11111111', '965111222', 'info@techcorp.com', '12345678', 'Parque Tecnológico, Nave 4', 'Alicante', '03008', 'TechCorp Iberia S.L.', 'Marcos Soler', 'EMPRESA'),
+    ('InnovaTech Alicante', 'B22222222', '965222333', 'donaciones@innovatech.es', '12345678', 'Polígono Canastell, C/ Industria', 'San Vicente del Raspeig', '03690', 'Innovación Tecnológica S.A.', 'Sara Méndez', 'EMPRESA'),
+    ('Global Logistics', 'B33333333', '965333444', 'sostenibilidad@global.com', '12345678', 'Avenida de Elche 150', 'Alicante', '03008', 'Global Logistics España', 'Javier Ramos', 'EMPRESA'),
+    ('EcoSoft Dev', 'B44444444', '965444555', 'rrhh@ecosoft.com', '12345678', 'Calle Innovación 2', 'Mutxamel', '03110', 'EcoSoft Development S.L.', 'Ana Pastor', 'EMPRESA'),
+    ('Agencia Creativa', 'B55555555', '965555666', 'hola@agenciacreativa.es', '12345678', 'Calle San Rafael 4', 'San Juan Pueblo', '03550', 'Estudio Creativo S.A.', 'Pedro Giménez', 'EMPRESA'),
+    ('Consultoría IT', 'B66666666', '965666777', 'admin@consultoriait.es', '12345678', 'Avenida Maisonnave 28, Entresuelo', 'Alicante', '03003', 'Consultores Informáticos S.L.', 'Lucía Vidal', 'EMPRESA');
+
+-- RESEÑAS DE LA COMUNIDAD (12 RESEÑAS)
+
+INSERT INTO resenas (texto, autor, rol, estrellas, activa) VALUES
+    ('Renovamos la oficina y donar los equipos antiguos fue un proceso rápido y transparente. Nos enorgullece saber que tendrán una segunda vida útil.', 'TechCorp Solutions', 'EMPRESA', 5, TRUE),
+    ('Gracias a RecycleWare conseguí un portátil para que mi hijo pudiera hacer los deberes del instituto. Ha sido una gran ayuda para nuestra familia.', 'Carlos M.', 'PARTICULAR', 5, TRUE),
+    ('Excelente plataforma. Nos emitieron el certificado de donación sin problemas y vinieron a recoger los monitores puntualmente.', 'InnovaTech Alicante', 'EMPRESA', 5, TRUE),
+    ('Llevaba meses ahorrando para un ordenador de sobremesa para estudiar programación. El equipo funciona de maravilla, ¡muchísimas gracias!', 'Laura G.', 'PARTICULAR', 5, TRUE),
+    ('Teníamos 5 ordenadores cogiendo polvo en el almacén. Saber que ahora los están usando familias que lo necesitan es una satisfacción enorme.', 'Agencia Creativa', 'EMPRESA', 5, TRUE),
+    ('El monitor que recibí está en perfecto estado. Me ha facilitado mucho el teletrabajo. Una iniciativa increíble.', 'Ahmed R.', 'PARTICULAR', 4, TRUE),
+    ('Me donaron componentes para arreglar mi viejo ordenador y ahora vuela. El proceso de solicitud fue súper rápido y transparente.', 'Sofía N.', 'PARTICULAR', 5, TRUE),
+    ('Como empresa de logística, la sostenibilidad es clave. RecycleWare nos ayudó a deshacernos de nuestra basura electrónica de forma responsable.', 'Global Logistics', 'EMPRESA', 4, TRUE),
+    ('Poder acceder a esta tecnología me ha abierto puertas para seguir formándome online. Eternamente agradecido al equipo y a los donantes.', 'David L.', 'PARTICULAR', 5, TRUE),
+    ('Súper sencillo. Subimos el lote de portátiles a la plataforma y en menos de una semana ya estaban asignados a estudiantes locales.', 'EcoSoft Dev', 'EMPRESA', 5, TRUE),
+    ('El trato de los voluntarios fue excepcional. Me explicaron cómo instalar todo y el ordenador va perfecto. 100% recomendable.', 'Elena T.', 'PARTICULAR', 4, TRUE),
+    ('Nos guiaron en el proceso de borrado seguro de datos antes de entregar los discos duros. Muy profesionales y una gran labor social.', 'Consultoría IT', 'EMPRESA', 5, TRUE);
