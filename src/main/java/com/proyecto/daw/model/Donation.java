@@ -16,7 +16,7 @@ public class Donation {
     // Relación con modelo User
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_donante") 
-    private User donante;
+    private Usuario donante;
 
     // Relación con el estado de la donación
     @ManyToOne(fetch = FetchType.EAGER)

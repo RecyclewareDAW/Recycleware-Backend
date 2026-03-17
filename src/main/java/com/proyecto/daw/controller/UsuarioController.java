@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
-import com.proyecto.daw.model.User;
+import com.proyecto.daw.model.Usuario;
 import com.proyecto.daw.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,12 +23,12 @@ import jakarta.validation.Valid;
 
 @RequestMapping("/users")
 @RestController
-public class UserController {
+public class UsuarioController {
 
     @Autowired
     private AuthenticationManager authManager;
 
-    public UserController(AuthenticationManager authManager) {
+    public UsuarioController(AuthenticationManager authManager) {
         this.authManager = authManager;
         // Este método permite conectar este controller con los datos de UserDetails de
         // SecurityConfig
@@ -38,12 +38,12 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("")
-    public List<User> showUsers() {
+    public List<Usuario> showUsers() {
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public User showUser(@PathVariable int id) {
+    public Usuario showUser(@PathVariable int id) {
         return userService.findById(id);
     }
 
@@ -56,14 +56,14 @@ public class UserController {
     }
 
     @GetMapping("/name/contiene/{cadena}")
-    public List<User> showUsersNameContiene(@PathVariable("cadena") String name) {
+    public List<Usuario> showUsersNameContiene(@PathVariable("cadena") String name) {
         return userService.findByNameContaining(name);
     }
 
     // AÑADIR USUARIO POST
 
     @PostMapping("")
-    public ResponseEntity<Map<String, Object>> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<Map<String, Object>> createUser(@Valid @RequestBody Usuario user) {
         ResponseEntity<Map<String, Object>> response;
         if (user == null) {
             Map<String, Object> map = new HashMap<>();
@@ -77,7 +77,7 @@ public class UserController {
                 map.put("error", "Los campos 'username', 'email' y 'password' son obligatorios");
                 response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
             } else {
-                User usuPost = userService.save(user);
+                Usuario usuPost = userService.save(user);
                 Map<String, Object> map = new HashMap<>();
                 map.put("mensaje", "Usuario creado con éxito");
                 map.put("insertUser", usuPost);
@@ -100,7 +100,7 @@ public class UserController {
         Map<String, Object> response = new HashMap<>();
 
         // buscamos al usuario por su correo
-        User user = userService.findByCorreo(correo);
+        Usuario user = userService.findByCorreo(correo);
 
         // comprobamos si el usuario y la contraseña son correctos
         if (user == null || !user.getPassword().equals(password)) {
@@ -135,8 +135,8 @@ public class UserController {
     // INSERTAR LOGOUT PARA EL SPRING SECURITY
 
     @PutMapping
-    public ResponseEntity<User> actualizarUsuario(@RequestBody User usuarioActualizado) {
-        User usuarioGuardado = userService.actualizarUsuario(usuarioActualizado);
+    public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuarioActualizado) {
+        Usuario usuarioGuardado = userService.actualizarUsuario(usuarioActualizado);
         // Si el Service nos devuelve null, es que no existía (Error 404)
         if (usuarioGuardado == null) {
             return ResponseEntity.notFound().build();

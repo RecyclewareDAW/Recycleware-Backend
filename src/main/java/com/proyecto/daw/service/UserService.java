@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proyecto.daw.model.User;
-import com.proyecto.daw.repository.UserRepository;
+import com.proyecto.daw.model.Usuario;
+import com.proyecto.daw.repository.UsuarioRepository;
 
 @Service
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UsuarioRepository userRepository;
 
-    public List<User> findAll() {
+    public List<Usuario> findAll() {
         return userRepository.findAll();
     }
 
-    public User findById(int id) {
+    public Usuario findById(int id) {
         return userRepository.findById(id);
     }
 
@@ -26,19 +26,19 @@ public class UserService {
         return userRepository.count();
     }
 
-    public List<User> findByNameContaining(String name) {
+    public List<Usuario> findByNameContaining(String name) {
         return userRepository.findByNameContaining(name);
     }
 
-    public User save(User user) {
+    public Usuario save(Usuario user) {
         return userRepository.save(user);
     }
 
-    public User findByCorreo(String correo) {
+    public Usuario findByCorreo(String correo) {
         return userRepository.findByCorreo(correo);
     }
 
-    public User actualizarUsuario(User usuarioActualizado) {
+    public Usuario actualizarUsuario(Usuario usuarioActualizado) {
         // Comprobamos si existe
         if (!userRepository.existsById(usuarioActualizado.getId())) {
             return null;

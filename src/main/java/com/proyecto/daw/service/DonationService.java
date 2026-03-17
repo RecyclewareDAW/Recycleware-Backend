@@ -2,11 +2,11 @@ package com.proyecto.daw.service;
 
 import com.proyecto.daw.exception.ResourceNotFoundException;
 import com.proyecto.daw.model.Donation;
-import com.proyecto.daw.model.User;
+import com.proyecto.daw.model.Usuario;
 import com.proyecto.daw.model.DonationState;
 import com.proyecto.daw.repository.DonationRepository;
 import com.proyecto.daw.repository.DonationStateRepository;
-import com.proyecto.daw.repository.UserRepository;
+import com.proyecto.daw.repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class DonationService {
     @Autowired
     private DonationRepository donationRepository;
     @Autowired
-    private UserRepository userRepository;
+    private UsuarioRepository userRepository;
     @Autowired
     private DonationStateRepository DonationStateRepository;
 
@@ -52,7 +52,7 @@ public class DonationService {
 
         // 2. Validamos Donante
         if (donation.getDonante() != null && donation.getDonante().getId() != null) {
-            User user = userRepository.findById(donation.getDonante().getId())
+            Usuario user = userRepository.findById(donation.getDonante().getId())
                     .orElseThrow(() -> new ResourceNotFoundException(
                             "El donante con ID " + donation.getDonante().getId() + " no existe."));
             donation.setDonante(user);

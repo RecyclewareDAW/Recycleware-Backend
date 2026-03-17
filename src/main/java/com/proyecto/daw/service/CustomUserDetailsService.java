@@ -3,20 +3,21 @@ package com.proyecto.daw.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.proyecto.daw.model.User;
-import com.proyecto.daw.repository.UserRepository;
+import com.proyecto.daw.model.Usuario;
+import com.proyecto.daw.repository.UsuarioRepository;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UsuarioRepository userRepository;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
+    public CustomUserDetailsService(UsuarioRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -25,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     //NOTA IMPORTANTE: aun que parezca contradictorio, correo y username son lo mismo por que son la string usada para identificar al ususario en la bd
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-        User user = userRepository.findByCorreo(correo);
+        Usuario user = userRepository.findByCorreo(correo);
         if (user == null) {
             throw new UsernameNotFoundException("Usuario no encontrado con correo: " + correo);
         }

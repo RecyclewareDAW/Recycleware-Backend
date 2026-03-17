@@ -25,7 +25,7 @@ public class Contact {
     // Relación con el usuario (puede ser nula si el visitante no está registrado)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
-    private User usuario;
+    private Usuario usuario;
 
     // Dejamos que la base de datos asigne la fecha automáticamente
     @Column(name = "fecha_envio", insertable = false, updatable = false)
