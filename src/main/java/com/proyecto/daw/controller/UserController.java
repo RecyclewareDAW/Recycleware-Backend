@@ -7,17 +7,33 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.daw.model.User;
 import com.proyecto.daw.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RequestMapping("/users")
 @RestController
 public class UserController {
-    
+
+    @Autowired
+    private AuthenticationManager authManager;
+
+    public UserController(AuthenticationManager authManager) {
+        this.authManager = authManager;
+        // Este método permite conectar este controller con los datos de UserDetails de
+        // SecurityConfig
+    }
+
     @Autowired
     private UserService userService;
 
@@ -27,20 +43,20 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User showUser(@PathVariable int id){
+    public User showUser(@PathVariable int id) {
         return userService.findById(id);
     }
-    
-    @GetMapping("/count")    
+
+    @GetMapping("/count")
     public Map<String, Object> countUsers() {
         Map<String, Object> obj = new HashMap<>();
         obj.put("users", userService.count());
 
-        return obj;  // Se mapea automáticamente a JSON usando Jackson        
+        return obj; // Se mapea automáticamente a JSON usando Jackson
     }
 
     @GetMapping("/name/contiene/{cadena}")
-        public List<User> showUsersNameContiene(@PathVariable("cadena") String name) {
+    public List<User> showUsersNameContiene(@PathVariable("cadena") String name) {
         return userService.findByNameContaining(name);
     }
 
@@ -73,8 +89,10 @@ public class UserController {
 
     // LOGIN DE USUARIO
     @PostMapping("/login")
-    // lo que enviamos desde el login lo guardamos en un map llamado credenciales para utilizarlo
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, String> credenciales) {
+    // lo que enviamos desde el login lo guardamos en un map llamado credenciales
+    // para utilizarlo
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, String> credenciales,
+            HttpServletRequest request) {
         String correo = credenciales.get("email");
         String password = credenciales.get("password");
 
@@ -91,12 +109,30 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
+        // INSERTAR AUTHENTICATIN Y CONTEXT AQUI -> enpointlogin.png
+
+        Authentication authentication = authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(correo, password));
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
+
+        // Muy importante: guardar en la sesión
+        request.getSession(true).setAttribute(
+                HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+                context);
+
+        // FIN AUTH
+
         // si esta ok
         response.put("mensaje", "Login exitoso");
         response.put("usuario", user);
 
         return ResponseEntity.ok(response);
     }
+
+    // INSERTAR LOGOUT PARA EL SPRING SECURITY
 
     @PutMapping
     public ResponseEntity<User> actualizarUsuario(@RequestBody User usuarioActualizado) {
