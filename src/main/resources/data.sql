@@ -120,3 +120,65 @@ VALUES (2, 3, 50, 'Donación de prueba Empresa A', 10.0);
 -- Donación para el usuario 5 (Bela - Rol: EMPRESA)
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
 VALUES (5, 3, 30, 'Donación de prueba Empresa B', 5.0);
+
+
+
+
+
+------------------------------------------------------
+-- Solicitudes de productos --------------------------
+------------------------------------------------------
+
+-- 1. El usuario 'Particular' (ID 3) solicita un Monitor Dell (ID 7)
+-- Estado: 1 (Pendiente)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 7, 'Necesito un monitor para que mi hijo pueda realizar sus tareas escolares en casa, ya que el nuestro se rompió.', 1);
+
+-- 2. El usuario 'Bela' (ID 4) solicita el Portatil HP (ID 9)
+-- Estado: 2 (En Revisión)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 9, 'Estoy realizando un curso de formación online y requiero un equipo portátil para poder seguir las clases y entregar los proyectos.', 2);
+
+-- 3. El usuario 'Particular' (ID 3) solicita el Ratón Acer (ID 1)
+-- Estado: 3 (Aprobada)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 1, 'Mi ratón actual ha dejado de funcionar y no tengo recursos para adquirir uno nuevo en este momento.', 3);
+
+-- 4. El usuario 'Bela' (ID 4) solicita la Torre PCGAM Slim (ID 3)
+-- Estado: 4 (Denegada)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 3, 'Solicito este equipo para montar un servidor doméstico de pruebas.', 4);
+
+-- 5. El usuario 'Particular' (ID 3) solicita el Altavoz MiFa (ID 2)
+-- Estado: 5 (Entregada)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 2, 'Necesito un dispositivo de audio para mis clases de idiomas online.', 5);
+
+------------------------------------------------------
+-- Más Solicitudes para el Usuario ID 4 (Bela) -------
+------------------------------------------------------
+
+-- 1. Solicita el Monitor VSDISPLAY (ID 8)
+-- Estado: 1 (Pendiente)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 8, 'Necesito un segundo monitor para mejorar mi productividad mientras estudio programación.', 1);
+
+-- 2. Solicita el Procesador AMD Ryzen (ID 5)
+-- Estado: 2 (En Revisión)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 5, 'Mi procesador actual falla constantemente y necesito este componente para reparar mi equipo principal.', 2);
+
+-- 3. Solicita el Portatil HP 255 G5 (ID 10)
+-- Estado: 3 (Aprobada)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 10, 'Requiero un equipo con más memoria RAM para poder ejecutar máquinas virtuales de mis prácticas.', 3);
+
+-- 4. Solicita la Fuente de alimentación Tempest (ID 6)
+-- Estado: 5 (Entregada)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 6, 'La fuente de mi ordenador se quemó tras una subida de tensión y necesito esta de sustitución.', 5);
+
+-- 5. Solicita la Torre dañada Nox (ID 4)
+-- Estado: 4 (Denegada)
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (4, 4, 'Me gustaría obtener esta torre para practicar soldadura y reparación de placas base.', 4);
