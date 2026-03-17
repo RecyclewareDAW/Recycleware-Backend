@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.daw.model.Usuario;
@@ -17,63 +18,77 @@ import jakarta.validation.Valid;
 @RequestMapping("/usuario")
 @RestController
 public class UsuarioController {
-    
+
     @Autowired
-    private UsuarioService UsuarioService;
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public List<Usuario> showUsuarios() {
-        return UsuarioService.findAll();
+        return usuarioService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Usuario showUsuario(@PathVariable int id){
-        return UsuarioService.findById(id);
+    public Usuario showUsuario(@PathVariable int id) {
+        return usuarioService.findById(id);
     }
-    
-    @GetMapping("/count")    
+
+    @GetMapping("/count")
     public Map<String, Object> countUsuarios() {
         Map<String, Object> obj = new HashMap<>();
-        obj.put("Usuarios", UsuarioService.count());
+        obj.put("Usuarios", usuarioService.count());
 
-        return obj;  // Se mapea automáticamente a JSON usando Jackson        
+        return obj; // Se mapea automáticamente a JSON usando Jackson
     }
 
     @GetMapping("/name/contiene/{cadena}")
-        public List<Usuario> showUsuariosNameContiene(@PathVariable("cadena") String name) {
-        return UsuarioService.findByNameContaining(name);
+    public List<Usuario> showUsuariosNameContiene(@PathVariable("cadena") String name) {
+        return usuarioService.findByNameContaining(name);
     }
 
     // AÑADIR USUARIO POST
 
     @PostMapping("")
-    public ResponseEntity<Map<String, Object>> createUsuario(@Valid @RequestBody Usuario Usuario) {
-        ResponseEntity<Map<String, Object>> response;
-        if (Usuario == null) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("error", "El cuerpo de la solicitud no puede estar vacío");
-            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
-        } else {
-            if (Usuario.getNombre() == null || Usuario.getNombre().trim().isEmpty()
-                    || Usuario.getCorreo() == null || Usuario.getCorreo().trim().isEmpty()
-                    || Usuario.getPassword() == null || Usuario.getPassword().trim().isEmpty()) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("error", "Los campos 'Usuarioname', 'email' y 'password' son obligatorios");
-                response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
-            } else {
-                Usuario usuPost = UsuarioService.save(Usuario);
-                Map<String, Object> map = new HashMap<>();
-                map.put("mensaje", "Usuario creado con éxito");
-                map.put("insertUsuario", usuPost);
-                response = ResponseEntity.status(HttpStatus.CREATED).body(map);
-            }
+    public ResponseEntity<Map<String, Object>> createUsuario(@Valid @RequestBody Usuario usuario) {
+        Map<String, Object> response = new HashMap<>();
+
+        if (usuario == null) {
+            response.put("error", "El cuerpo de la solicitud no puede estar vacío");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return response;
+
+        // Validación manual básica (además de @Valid)
+        if (usuario.getNombre() == null || usuario.getNombre().trim().isEmpty()
+                || usuario.getCorreo() == null || usuario.getCorreo().trim().isEmpty()
+                || usuario.getPassword() == null || usuario.getPassword().trim().isEmpty()) {
+            response.put("error", "Los campos 'Nombre', 'email' y 'password' son obligatorios");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        try {
+            // 1. IMPORTANTE: Encriptar la contraseña antes de guardar
+            String passwordEncriptada = passwordEncoder.encode(usuario.getPassword());
+            usuario.setPassword(passwordEncriptada);
+
+            // 2. Guardar usando la instancia inyectada (minúscula)
+            Usuario usuPost = usuarioService.save(usuario);
+
+            response.put("mensaje", "Usuario creado con éxito");
+            response.put("insertUsuario", usuPost);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+        } catch (Exception e) {
+            response.put("error", "Error al crear el usuario: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 
     // LOGIN DE USUARIO
     @PostMapping("/login")
-    // lo que enviamos desde el login lo guardamos en un map llamado credenciales para utilizarlo
+    // lo que enviamos desde el login lo guardamos en un map llamado credenciales
+    // para utilizarlo
     public ResponseEntity<Map<String, Object>> loginUsuario(@RequestBody Map<String, String> credenciales) {
         String correo = credenciales.get("email");
         String password = credenciales.get("password");
@@ -82,29 +97,54 @@ public class UsuarioController {
         Map<String, Object> response = new HashMap<>();
 
         // buscamos al usuario por su correo
-        Usuario Usuario = UsuarioService.findByCorreo(correo);
+        Usuario usuario = usuarioService.findByCorreo(correo);
 
         // comprobamos si el usuario y la contraseña son correctos
-        if (Usuario == null || !Usuario.getPassword().equals(password)) {
+        if (usuario == null || !passwordEncoder.matches(password, usuario.getPassword())) {
             response.put("error", "Correo o contraseña incorrectos");
-            // devolvemos 401 Unauthorized
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
         // si esta ok
         response.put("mensaje", "Login exitoso");
-        response.put("usuario", Usuario);
+        response.put("usuario", usuario);
 
         return ResponseEntity.ok(response);
     }
 
     @PutMapping
     public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuarioActualizado) {
-        Usuario usuarioGuardado = UsuarioService.actualizarUsuario(usuarioActualizado);
-        // Si el Service nos devuelve null, es que no existía (Error 404)
+        // El Service ahora es el que hace el trabajo inteligente
+        Usuario usuarioGuardado = usuarioService.actualizarUsuario(usuarioActualizado);
+
         if (usuarioGuardado == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(usuarioGuardado);
+    }
+
+    @PostMapping("/cambiar-password")
+    public ResponseEntity<Map<String, Object>> cambiarPassword(@RequestBody Map<String, String> datos) {
+        Map<String, Object> response = new HashMap<>();
+
+        int id = Integer.parseInt(datos.get("id"));
+        String actual = datos.get("passwordActual");
+        String nueva = datos.get("nuevaPassword");
+
+        Usuario usuario = usuarioService.findById(id);
+
+        // Comparación segura usando el PasswordEncoder de Spring Security
+        // passwordEncoder.matches(textoPlano, textoEncriptadoEnBD)
+        if (!passwordEncoder.matches(actual, usuario.getPassword())) {
+            response.put("error", "La contraseña actual no es correcta.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+
+        // Encriptamos la nueva contraseña antes de guardarla
+        usuario.setPassword(passwordEncoder.encode(nueva));
+        usuarioService.save(usuario);
+
+        response.put("mensaje", "Contraseña actualizada correctamente");
+        return ResponseEntity.ok(response);
     }
 }
