@@ -2,11 +2,11 @@ package com.proyecto.daw.service;
 
 import com.proyecto.daw.exception.ResourceNotFoundException;
 import com.proyecto.daw.model.Donation;
-import com.proyecto.daw.model.User;
+import com.proyecto.daw.model.Usuario;
 import com.proyecto.daw.model.DonationState;
 import com.proyecto.daw.repository.DonationRepository;
 import com.proyecto.daw.repository.DonationStateRepository;
-import com.proyecto.daw.repository.UserRepository;
+import com.proyecto.daw.repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class DonationService {
     @Autowired
     private DonationRepository donationRepository;
     @Autowired
-    private UserRepository userRepository;
+    private UsuarioRepository UsuarioRepository;
     @Autowired
     private DonationStateRepository DonationStateRepository;
 
@@ -36,8 +36,8 @@ public class DonationService {
     }
 
     // Listar por usuario
-    public List<Donation> findByUserId(Integer userId) {
-        return donationRepository.findByDonanteId(userId);
+    public List<Donation> findByUsuarioId(Integer UsuarioId) {
+        return donationRepository.findByDonanteId(UsuarioId);
     }
 
     public List<Object[]> obtenerRankingEmpresas() {
@@ -52,10 +52,10 @@ public class DonationService {
 
         // 2. Validamos Donante
         if (donation.getDonante() != null && donation.getDonante().getId() != null) {
-            User user = userRepository.findById(donation.getDonante().getId())
+            Usuario Usuario = UsuarioRepository.findById(donation.getDonante().getId())
                     .orElseThrow(() -> new ResourceNotFoundException(
                             "El donante con ID " + donation.getDonante().getId() + " no existe."));
-            donation.setDonante(user);
+            donation.setDonante(Usuario);
         }
 
         // 3. Validamos Estado

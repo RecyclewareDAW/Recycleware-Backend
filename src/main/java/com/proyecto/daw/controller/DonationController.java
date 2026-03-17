@@ -22,9 +22,9 @@ public class DonationController {
         return donationService.findById(id);
     }
 
-    @GetMapping("/user/{userId}")
-    public List<Donation> getByUserId(@PathVariable Integer userId) {
-        return donationService.findByUserId(userId);
+    @GetMapping("/usuario/{UsuarioId}")
+    public List<Donation> getByUsuarioId(@PathVariable Integer UsuarioId) {
+        return donationService.findByUsuarioId(UsuarioId);
     }
 
     @GetMapping("/ranking")

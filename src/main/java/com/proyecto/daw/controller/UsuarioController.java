@@ -9,62 +9,62 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.proyecto.daw.model.User;
-import com.proyecto.daw.service.UserService;
+import com.proyecto.daw.model.Usuario;
+import com.proyecto.daw.service.UsuarioService;
 
 import jakarta.validation.Valid;
 
-@RequestMapping("/users")
+@RequestMapping("/usuario")
 @RestController
-public class UserController {
+public class UsuarioController {
     
     @Autowired
-    private UserService userService;
+    private UsuarioService UsuarioService;
 
     @GetMapping("")
-    public List<User> showUsers() {
-        return userService.findAll();
+    public List<Usuario> showUsuarios() {
+        return UsuarioService.findAll();
     }
 
     @GetMapping("/{id}")
-    public User showUser(@PathVariable int id){
-        return userService.findById(id);
+    public Usuario showUsuario(@PathVariable int id){
+        return UsuarioService.findById(id);
     }
     
     @GetMapping("/count")    
-    public Map<String, Object> countUsers() {
+    public Map<String, Object> countUsuarios() {
         Map<String, Object> obj = new HashMap<>();
-        obj.put("users", userService.count());
+        obj.put("Usuarios", UsuarioService.count());
 
         return obj;  // Se mapea automáticamente a JSON usando Jackson        
     }
 
     @GetMapping("/name/contiene/{cadena}")
-        public List<User> showUsersNameContiene(@PathVariable("cadena") String name) {
-        return userService.findByNameContaining(name);
+        public List<Usuario> showUsuariosNameContiene(@PathVariable("cadena") String name) {
+        return UsuarioService.findByNameContaining(name);
     }
 
     // AÑADIR USUARIO POST
 
     @PostMapping("")
-    public ResponseEntity<Map<String, Object>> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<Map<String, Object>> createUsuario(@Valid @RequestBody Usuario Usuario) {
         ResponseEntity<Map<String, Object>> response;
-        if (user == null) {
+        if (Usuario == null) {
             Map<String, Object> map = new HashMap<>();
             map.put("error", "El cuerpo de la solicitud no puede estar vacío");
             response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
         } else {
-            if (user.getNombre() == null || user.getNombre().trim().isEmpty()
-                    || user.getCorreo() == null || user.getCorreo().trim().isEmpty()
-                    || user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+            if (Usuario.getNombre() == null || Usuario.getNombre().trim().isEmpty()
+                    || Usuario.getCorreo() == null || Usuario.getCorreo().trim().isEmpty()
+                    || Usuario.getPassword() == null || Usuario.getPassword().trim().isEmpty()) {
                 Map<String, Object> map = new HashMap<>();
-                map.put("error", "Los campos 'username', 'email' y 'password' son obligatorios");
+                map.put("error", "Los campos 'Usuarioname', 'email' y 'password' son obligatorios");
                 response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
             } else {
-                User usuPost = userService.save(user);
+                Usuario usuPost = UsuarioService.save(Usuario);
                 Map<String, Object> map = new HashMap<>();
                 map.put("mensaje", "Usuario creado con éxito");
-                map.put("insertUser", usuPost);
+                map.put("insertUsuario", usuPost);
                 response = ResponseEntity.status(HttpStatus.CREATED).body(map);
             }
         }
@@ -74,7 +74,7 @@ public class UserController {
     // LOGIN DE USUARIO
     @PostMapping("/login")
     // lo que enviamos desde el login lo guardamos en un map llamado credenciales para utilizarlo
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, String> credenciales) {
+    public ResponseEntity<Map<String, Object>> loginUsuario(@RequestBody Map<String, String> credenciales) {
         String correo = credenciales.get("email");
         String password = credenciales.get("password");
 
@@ -82,10 +82,10 @@ public class UserController {
         Map<String, Object> response = new HashMap<>();
 
         // buscamos al usuario por su correo
-        User user = userService.findByCorreo(correo);
+        Usuario Usuario = UsuarioService.findByCorreo(correo);
 
         // comprobamos si el usuario y la contraseña son correctos
-        if (user == null || !user.getPassword().equals(password)) {
+        if (Usuario == null || !Usuario.getPassword().equals(password)) {
             response.put("error", "Correo o contraseña incorrectos");
             // devolvemos 401 Unauthorized
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
@@ -93,14 +93,14 @@ public class UserController {
 
         // si esta ok
         response.put("mensaje", "Login exitoso");
-        response.put("usuario", user);
+        response.put("usuario", Usuario);
 
         return ResponseEntity.ok(response);
     }
 
     @PutMapping
-    public ResponseEntity<User> actualizarUsuario(@RequestBody User usuarioActualizado) {
-        User usuarioGuardado = userService.actualizarUsuario(usuarioActualizado);
+    public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuarioActualizado) {
+        Usuario usuarioGuardado = UsuarioService.actualizarUsuario(usuarioActualizado);
         // Si el Service nos devuelve null, es que no existía (Error 404)
         if (usuarioGuardado == null) {
             return ResponseEntity.notFound().build();
