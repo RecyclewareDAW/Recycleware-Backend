@@ -35,7 +35,7 @@ public class Request implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_solicitante", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private User applicant; // "solicitante" en inglés
+    private Usuario applicant; // "solicitante" en inglés
 
     // Relación con el Producto (el equipo que se pide)
     @ManyToOne(fetch = FetchType.LAZY)

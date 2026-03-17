@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.proyecto.daw.model.Producto;
 import com.proyecto.daw.model.Request;
 import com.proyecto.daw.model.RequestState;
-import com.proyecto.daw.model.User;
+import com.proyecto.daw.model.Usuario;
 import com.proyecto.daw.repository.RequestRepository;
 import com.proyecto.daw.repository.RequestStateRepository;
 
@@ -22,7 +22,7 @@ public class RequestService {
     private RequestStateRepository requestStateRepository;
 
     @Autowired
-    private UserService userService;
+    private UsuarioService UsuarioService;
 
     @Autowired
     private ProductoService productoService;
@@ -36,7 +36,7 @@ public class RequestService {
     public Request crearSolicitud(int idSolicitante, int idProducto, String motivo) {
         
         // Buscamos los objetos completos usando los IDs que nos manda React
-        User solicitante = userService.findById(idSolicitante);
+        Usuario solicitante = UsuarioService.findById(idSolicitante);
         Producto producto = productoService.findById(idProducto);
 
         // Buscamos el estado inicial "Pendiente" 
