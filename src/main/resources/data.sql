@@ -103,7 +103,7 @@ VALUES ('SoftAlacant', '43345902E', '600111223', 'soft.alacant@empresa.com', '$2
 
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Doctorbalmis', '43445905S', '600111223', 'balmis@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'IES Doctorbalmis', 'Javier Catalá', 'EMPRESA');
+VALUES ('Doctorbalmis', '43445905S', '600222223', 'balmis@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'IES Doctorbalmis', 'Javier Catalá', 'EMPRESA');
 
 
 
@@ -224,8 +224,13 @@ VALUES (8, 1, 35 'Donación de torres', 25.0);
 -- Donaciones varias
 
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
-VALUES (9, 3, 30 'Donación de 3 torres', 25.0);
+VALUES (9, 3, 50, 'Donación variada', 70.0);
 
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (9, 3, 10, 'Donación de monitores', 20.0);
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (10, 3, 5, 'Donación de portatiles', 10.0);
 
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
 VALUES (10, 3, 35 'Donación de 3 torres', 25.0);

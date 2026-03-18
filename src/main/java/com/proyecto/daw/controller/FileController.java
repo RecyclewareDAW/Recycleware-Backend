@@ -23,15 +23,15 @@ public class FileController {
     public ResponseEntity<Resource> getImage(@PathVariable int id) throws Exception {
         // Path to the image file
         ArrayList<Path> listaImagenes = new ArrayList<Path>();
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_artecPc.jpg"));
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_Dell_Computer_Monitor.png"));
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_DellP2212Hb.jpg"));
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_LaptopBrokenScreen.jpg"));
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_LenovoG500.jpg"));
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_LogitechMouse.jpg"));
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_Old_Computer_Mouse.jpg"));
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_SapphireRadeonHD5570.jpg"));
-        listaImagenes.add(Paths.get("Recycleware-Backend/src/main/resources/static/images/resizedIntelCorei7.jpg"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resized_artecPc.jpg"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resized_Dell_Computer_Monitor.png"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resized_DellP2212Hb.jpg"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resized_LaptopBrokenScreen.jpg"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resized_LenovoG500.jpg"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resized_LogitechMouse.jpg"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resized_Old_Computer_Mouse.jpg"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resized_SapphireRadeonHD5570.jpg"));
+        listaImagenes.add(Paths.get("src/main/resources/static/images/resizedIntelCorei7.jpg"));
         // Path path =
         // Paths.get("Recycleware-Backend/src/main/resources/static/images/resized_artecPc.jpg");
         // Load the resource
