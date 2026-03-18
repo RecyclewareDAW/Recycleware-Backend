@@ -1,4 +1,5 @@
 package com.proyecto.daw.exception;
+
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,12 +18,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> serializacionError(
-            HttpMessageNotReadableException ex, HttpServletRequest request) { 
-        
+            HttpMessageNotReadableException ex, HttpServletRequest request) {
+
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", java.time.LocalDateTime.now());
         response.put("status", 400);
@@ -31,8 +33,7 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
-    
-    
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> manejarValidacion(
             MethodArgumentNotValidException ex, HttpServletRequest request) {
@@ -43,19 +44,17 @@ public class GlobalExceptionHandler {
         // response.put("message", ex.getMessage());
         response.put("path", request.getRequestURI());
         Map<String, String> errores = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-            errores.put(error.getField(), error.getDefaultMessage())
-        );
-        
+        ex.getBindingResult().getFieldErrors()
+                .forEach(error -> errores.put(error.getField(), error.getDefaultMessage()));
+
         response.put("validaciones", errores);
-        
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);        
-    }    
-    
-    
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<?> handleDuplicate(
-            DataIntegrityViolationException ex, HttpServletRequest request) {            
+            DataIntegrityViolationException ex, HttpServletRequest request) {
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", java.time.LocalDateTime.now());
         response.put("status", 409);
@@ -64,6 +63,7 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<?> handleNotFound(
             EmptyResultDataAccessException ex, HttpServletRequest request) {
@@ -75,6 +75,7 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
     // 1. Primero: Recurso no encontrado (404 personalizado)
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleResourceNotFound(
@@ -87,6 +88,7 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
     // 2. Segundo: URL no encontrada (404)
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(
@@ -99,8 +101,9 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
     // 3. Tercero: Error específico de recurso estático (convertir a 404)
-    @ExceptionHandler(NoResourceFoundException.class)  // Spring Boot 3.x
+    @ExceptionHandler(NoResourceFoundException.class) // Spring Boot 3.x
     public ResponseEntity<Map<String, Object>> handleNoResourceFound(
             HttpServletRequest request) {
         Map<String, Object> response = new HashMap<>();
@@ -111,6 +114,7 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
     // 1. Error de tipo de parámetro (400)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Map<String, Object>> handleTypeMismatch(
@@ -123,6 +127,7 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
     // 2. Parámetros faltantes (400)
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<Map<String, Object>> handleMissingParams(
@@ -135,6 +140,7 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
     // 4. Cuarto: Error general (500) con detección de 404s disfrazados
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleAllExceptions(
@@ -165,6 +171,7 @@ public class GlobalExceptionHandler {
         }
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     // Método auxiliar para detectar 404s disfrazados
     private boolean isActually404Error(String message, String path) {
         if (message == null) {
@@ -178,19 +185,34 @@ public class GlobalExceptionHandler {
                 || lowerMessage.contains("resource not found")
                 || lowerMessage.contains("404")
                 || (path.startsWith("/api/")
-                && !lowerMessage.contains("internal server error")
-                && !lowerMessage.contains("database")
-                && !lowerMessage.contains("sql")
-                && !lowerMessage.contains("connection"));
+                        && !lowerMessage.contains("internal server error")
+                        && !lowerMessage.contains("database")
+                        && !lowerMessage.contains("sql")
+                        && !lowerMessage.contains("connection"));
     }
+
     private boolean isDevelopment() {
         // Cambia esto según tu entorno
-        return true;  // o leer de application.properties
+        return true; // o leer de application.properties
     }
+
     private List<String> getFirstLinesOfStackTrace(Exception ex) {
         return Arrays.stream(ex.getStackTrace())
                 .limit(5)
                 .map(StackTraceElement::toString)
                 .collect(Collectors.toList());
     }
+
+    // BELA BORRAR SI FALLA ALGO
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    public ResponseEntity<?> handleAccessDenied(Exception ex, HttpServletRequest request) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", java.time.LocalDateTime.now());
+        response.put("status", 403);
+        response.put("error", "Prohibido");
+        response.put("message", "No tienes permisos para acceder a este recurso.");
+        response.put("path", request.getRequestURI());
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
+
 }

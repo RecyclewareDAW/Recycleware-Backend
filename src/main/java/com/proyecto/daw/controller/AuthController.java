@@ -106,4 +106,13 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/check")
+    public ResponseEntity<?> checkSession(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Devolvemos un Map vacío para que sea un JSON válido "{}"
+            return ResponseEntity.ok(new HashMap<>());
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 }

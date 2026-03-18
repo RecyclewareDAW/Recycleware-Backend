@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity //Bela
+@EnableMethodSecurity // Bela
 public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
@@ -35,43 +35,36 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable()) // Deshabilitado para peticiones desde React
-            .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-            )
-            .authorizeHttpRequests(auth -> auth
-                // --- ACCESO PÚBLICO ---
-                .requestMatchers("/usuario/login", "/usuario", "/contacto", "/auth/login", "/auth/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/productos/**", "/donations/ranking", "/donation-states/**", "/comunidad/resenas").permitAll()
-                
-                // --- ROLES ESPECÍFICOS ---
-                // 1. PRODUCTOS: Solo ADMIN puede crear/editar/borrar (si añades esos métodos)
-                .requestMatchers(HttpMethod.POST, "/productos/**").permitAll()
-                
-                // 2. SOLICITUDES: PARTICULAR y EMPRESA pueden crear, ADMIN puede ver todas y cambiar estado
-                .requestMatchers(HttpMethod.POST, "/solicitudes").permitAll()
-                .requestMatchers(HttpMethod.GET, "/solicitudes/usuario/**").permitAll()
-                .requestMatchers("/solicitudes/todas", "/solicitudes/*/status").permitAll()
-                
-                // 3. DONACIONES: Cualquier usuario logueado puede donar
-                .requestMatchers(HttpMethod.POST, "/donations").permitAll()
-                .requestMatchers("/donations/*/status").permitAll()
-                
-                // 4. CONTACTO: Ver mensajes solo ADMIN
-                .requestMatchers("/contacto/todos").permitAll()
-                
-                .requestMatchers(HttpMethod.PUT, "/usuario/update-password").permitAll()
-                // 5. USUARIOS: Gestión total solo ADMIN
-                // .requestMatchers("/usuario/**").hasRole("ADMIN")
-                
-                // --- CONSOLA H2 ---
-                .requestMatchers("/h2-console/**").permitAll()
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable()) // Deshabilitado para peticiones desde React
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .authorizeHttpRequests(auth -> auth
+                        // --- 1. ACCESO PÚBLICO (Sin login) ---
+                        .requestMatchers("/auth/**", "/usuario/login", "/usuario", "/contacto").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/comunidad/resenas", "/donaciones/ranking",
+                                "/donaciones/ultima")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, "/productos/**", "/images/**").permitAll() // ¡Vital para ver
+                                                                                                    // fotos!
+                        .requestMatchers("/terminos", "/ranking", "/h2-console/**").permitAll()
 
-                .anyRequest().permitAll()
-            )
-            .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
-            .httpBasic(Customizer.withDefaults());
+                        // --- 2. ACCESO SOLO PARA ADMIN ---
+                        .requestMatchers("/contacto/todos", "/usuario/count", "/usuario").hasRole("ADMIN")
+                        .requestMatchers("/solicitudes/todas", "/donaciones").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/productos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/donaciones/**").hasRole("ADMIN")
+
+                        // --- 3. ACCESO AUTENTICADO (Cualquier usuario logueado) ---
+                        .requestMatchers("/usuario/perfil", "/usuario/cambiar-password", "/auth/check").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/usuario").authenticated() // Actualizar sus propios datos
+                        .requestMatchers("/solicitudes/**", "/donaciones/**").authenticated()
+                        .requestMatchers("/donation-states/**").authenticated()
+
+                        // --- 4. CIERRE DE SEGURIDAD ---
+                        .anyRequest().authenticated())
+                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
@@ -89,11 +82,17 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOriginPatterns(Arrays.asList(
+                "http://localhost:5173",
+                "http://*.amazonaws.com",
+                "https://*.amazonaws.com"));
         // Puerto por defecto de Vite/React
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
