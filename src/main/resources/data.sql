@@ -57,7 +57,7 @@ VALUES ('Bela emproesa 4', '12355035X', '600111222', 'bela@empresa4.com', '$2a$1
     
     -- Periféricos
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Ratón Mars', 1, 2, 1, 'Ratón gastado con dos botones laterales y boton de cambio de DPI', 'https://placehold.co/600x400/orange/white');
+VALUES ('Ratón Mars', 1, 2, 1, 'Ratón gastado con dos botones laterales y boton de cambio de DPI', 'http://localhost:8080/api/images/6');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
 VALUES ('Ratón inalambrico Logitec', 1, 2, 1, 'Ratón inalambrico con usb independiente con 2 botones laterales y poco rango de conexión', 'https://placehold.co/600x400/green/white');
