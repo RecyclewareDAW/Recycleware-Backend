@@ -15,7 +15,7 @@ INSERT INTO estados_producto (nombre) VALUES ('Para Piezas');
 
 -- Disponibilidad de producto
 INSERT INTO disponibilidad_producto (nombre) VALUES ('Disponible');
-INSERT INTO disponibilidad_producto (nombre) VALUES ('No Disponible');
+INSERT INTO disponibilidad_producto (nombre) VALUES ('Reservado');
 
 -- Estados de la gestión de solicitudes
 INSERT INTO estados_solicitud (nombre) VALUES ('Pendiente');
@@ -24,31 +24,31 @@ INSERT INTO estados_solicitud (nombre) VALUES ('Aprobada');
 INSERT INTO estados_solicitud (nombre) VALUES ('Denegada');
 INSERT INTO estados_solicitud (nombre) VALUES ('Entregada');
 
--- Usuarios de prueba (contraseña: 123456789 o 987654321)
+-- Usuarios de prueba (contraseña: 1234 para todo (hasheada))
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '12345678', 'Calle Falsa 123', 'Alicante', '03001', 'ADMIN');
+VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Falsa 123', 'Alicante', '03001', 'ADMIN');
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Empresa', '12345635X', '600111222', 'empresa@recycleware.com', '12345678', 'Calle empresa 10', 'Alicante', '03001', 'Recycleware SL', 'Recycle', 'EMPRESA');
+VALUES ('Empresa', '12345635X', '600111222', 'empresa@recycleware.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Recycleware SL', 'Recycle', 'EMPRESA');
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Particular', '12345675X', '600111222', 'particular@ejemplo.com', '987654321', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
-
-INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Bela', '12345645X', '600111222', 'bela@particular.com', '1234', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
-
-INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Empresa Bela', '72345635X', '600111222', 'bela@empresa.com', '1234', 'Calle empresa 10', 'Alicante', '03001', 'Empresa de Bela', 'Ree', 'EMPRESA');
+VALUES ('Particular', '12345675X', '600111222', 'particular@ejemplo.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Bela', '19345675X', '600111222', 'bela@admin.com', '1234', 'Calle Balmis 45', 'Alicante', '03001', 'ADMIN');
+VALUES ('Bela', '12345645X', '600111222', 'bela@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Bela emproesa 2', '12345935X', '600111222', 'bela@empresa2.com', '1234', 'Calle empresa 10', 'Alicante', '03001', 'Otra emporesa', 'Recycle', 'EMPRESA');
+VALUES ('Empresa Bela', '72345635X', '600111222', 'bela@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Empresa de Bela', 'Ree', 'EMPRESA');
+
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
+VALUES ('Bela', '19345675X', '600111222', 'bela@admin.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'ADMIN');
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Bela emproesa 3', '12345035X', '600111222', 'bela@empresa3.com', '1234', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa terceera', 'Recycle', 'EMPRESA');
+VALUES ('Bela emproesa 2', '12345935X', '600111222', 'bela@empresa2.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Otra emporesa', 'Recycle', 'EMPRESA');
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Bela emproesa 4', '12355035X', '600111222', 'bela@empresa4.com', '1234', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa cuarta', 'Recycle', 'EMPRESA');
+VALUES ('Bela emproesa 3', '12345035X', '600111222', 'bela@empresa3.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa terceera', 'Recycle', 'EMPRESA');
+
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
+VALUES ('Bela emproesa 4', '12355035X', '600111222', 'bela@empresa4.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa cuarta', 'Recycle', 'EMPRESA');
 
 
 ------------------------------------------------------
@@ -57,15 +57,15 @@ VALUES ('Bela emproesa 4', '12355035X', '600111222', 'bela@empresa4.com', '1234'
     
     -- Periféricos
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Ratón Acer OMW', 1, 1, 1, 'Ratón apenas usado con dos botones laterales y boton de cambio de DPI', 'https://placehold.co/600x400/orange/white');
+VALUES ('Ratón Mars', 1, 2, 1, 'Ratón gastado con dos botones laterales y boton de cambio de DPI', 'https://placehold.co/600x400/orange/white');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Altavoz MiFa', 1, 2, 1, 'Altavoz con uso visible pero completamente funcional', 'https://placehold.co/600x400/green/white');
+VALUES ('Ratón inalambrico Logitec', 1, 2, 1, 'Ratón inalambrico con usb independiente con 2 botones laterales y poco rango de conexión', 'https://placehold.co/600x400/green/white');
 
     
     -- Sobremesa
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Torre PCGAM Slim', 3, 1, 1, 'Intel I3 16RAM 120 SSD', 'https://thumb.pccomponentes.com/w-530-530/articles/1083/10837879/1830-pcgam-oficina-madrid-slim-intel-core-i3-10100-16gb-500gb-ssd.jpg');
+VALUES ('Torre Artec netanya', 3, 1, 1, 'Core I5 8RAM 1TB hhd y lector de Dvd', 'https://thumb.pccomponentes.com/w-530-530/articles/1083/10837879/1830-pcgam-oficina-madrid-slim-intel-core-i3-10100-16gb-500gb-ssd.jpg');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
 VALUES ('Torre dañada Nox', 3, 4, 1, 'Torre rota que se desconoce por que no arranca y antiguo', 'https://placehold.co/400x600/red/black');
@@ -73,26 +73,26 @@ VALUES ('Torre dañada Nox', 3, 4, 1, 'Torre rota que se desconoce por que no ar
     
     -- Componentes
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Procesador AMD Ryzen 2600', 4, 1, 2, 'Procesador con apenas uso', 'https://placehold.co/600x600/blue/white');
+VALUES ('Procesador Intel i7-6700K', 4, 1, 2, 'Procesador con apenas uso', 'https://placehold.co/600x600/blue/white');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Fuente alimentación Tempest Pulse', 4, 2, 1, 'Fuente con varios años de uso pero todavía funcional ni indicios de estropearse', 'https://placehold.co/600x400/red/black');
+VALUES ('GPU Sapphire Radeon HD 5570', 4, 2, 1, 'Tarjeta gráfica con varios años de uso pero todavía funcional ni indicios de estropearse', 'https://placehold.co/600x400/red/black');
 
     
     -- Monitores
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Monitor Dell Pro 22', 5, 1, 1, 'Monitor Dell de una oficinia que pese al uso esta en buen estado todavía', 'https://placehold.co/600x600/blue/white');
+VALUES ('Monitor Dell P2212', 5, 1, 1, 'Monitor Dell de una oficinia que pese al uso esta en buen estado todavía', 'https://placehold.co/600x600/blue/white');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Monitor VSDISPLAY LCD', 5, 3, 1, 'Monitor de 4:3 con varias franjas verticales negras aún todavia funcional', 'https://placehold.co/600x400/red/black');
+VALUES ('Monitor VSDISPLAY LCD', 5, 3, 1, 'Monitor con 3 franjas verticales negras pero todavia funcional', 'https://placehold.co/600x400/red/black');
 
     
     -- Portatiles
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Portatil HP Pavilion', 2, 1, 1, 'AMD A4 4GB Ram 50Gb hdd', 'https://placehold.co/600x600/blue/white');
+VALUES ('Dell Inspiron', 2, 3, 1, '8Gb Ram 120Gb Hdd. Pantalla dañada por un golpe pero el resto del dispositivo funciona correctamente', 'https://placehold.co/600x600/blue/white');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Portatil HP 255 G5', 2, 1, 1, '16Gb Ram 400 Gb Hdd', 'https://placehold.co/600x400/red/black');
+VALUES ('Lenovo G500s', 2, 1, 1, '8Gb Ram 320Gb Hdd y webcam integrada', 'https://placehold.co/600x400/red/black');
 
 
 
