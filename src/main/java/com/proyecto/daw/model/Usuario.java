@@ -1,5 +1,7 @@
 package com.proyecto.daw.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,6 +25,7 @@ public class Usuario {
     @Column(nullable = false, length = 80, unique = true)
     private String correo;
 
+    @JsonIgnore // Bela
     @Column(name = "contrasenia", nullable = false, length = 80)
     private String password;
 

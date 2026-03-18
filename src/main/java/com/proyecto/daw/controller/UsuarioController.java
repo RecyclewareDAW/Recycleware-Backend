@@ -90,17 +90,17 @@ public class UsuarioController {
     // lo que enviamos desde el login lo guardamos en un map llamado credenciales
     // para utilizarlo
     public ResponseEntity<Map<String, Object>> loginUsuario(@RequestBody Map<String, String> credenciales) {
-        String correo = credenciales.get("email");
-        String password = credenciales.get("password");
+        String emailFrontend = credenciales.get("email");
+        String passwordFrontend = credenciales.get("password");
 
         // creamos un nuevo mapa para guardar la respuesta
         Map<String, Object> response = new HashMap<>();
 
         // buscamos al usuario por su correo
-        Usuario usuario = usuarioService.findByCorreo(correo);
+        Usuario usuario = usuarioService.findByCorreo(emailFrontend);
 
         // comprobamos si el usuario y la contraseña son correctos
-        if (usuario == null || !passwordEncoder.matches(password, usuario.getPassword())) {
+        if (usuario == null || !passwordEncoder.matches(passwordFrontend, usuario.getPassword())) {
             response.put("error", "Correo o contraseña incorrectos");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
