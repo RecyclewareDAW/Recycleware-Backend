@@ -79,7 +79,7 @@ public class RequestService {
         }
 
         // Marcamos el producto de la solicitud como no disponible si se aprueba la solicitud
-        if (nuevoEstado.getName() == "Aprobada") {
+        if (nuevoEstado.getName().equals("Aprobada") || nuevoEstado.getName().equals("Entregada")) {
             productoService.marcarProductoNoDisponibleById(solicitud.getProduct().getId());
         }
 

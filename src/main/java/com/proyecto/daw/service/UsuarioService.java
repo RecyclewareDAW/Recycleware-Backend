@@ -54,6 +54,8 @@ public class UsuarioService {
             usuarioExistente.setDireccion(datosNuevos.getDireccion());
             usuarioExistente.setLocalidad(datosNuevos.getLocalidad());
             usuarioExistente.setCodigoPostal(datosNuevos.getCodigoPostal());
+            usuarioExistente.setNombreContacto(datosNuevos.getNombreContacto());
+            usuarioExistente.setRazonSocial(datosNuevos.getRazonSocial());
 
             // IMPORTANTE: No tocamos el correo ni el DNI.
             // Como no cambian, Hibernate sabe que es una ACTUALIZACIÓN y no un INSERT.
