@@ -65,7 +65,7 @@ VALUES ('Ratón inalambrico Logitec', 1, 2, 1, 'Ratón inalambrico con usb indep
     
     -- Sobremesa
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Torre Artec netanya', 3, 1, 1, 'Core I5 8RAM 1TB hhd y lector de Dvd', 'https://thumb.pccomponentes.com/w-530-530/articles/1083/10837879/1830-pcgam-oficina-madrid-slim-intel-core-i3-10100-16gb-500gb-ssd.jpg');
+VALUES ('Torre Artec netanya', 3, 1, 1, 'Core I5 8RAM 1TB hhd y lector de Dvd', 'http://localhost:8080/api/images/0');
 
     
     -- Componentes
