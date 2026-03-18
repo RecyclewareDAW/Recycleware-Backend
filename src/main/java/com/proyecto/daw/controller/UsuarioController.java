@@ -63,7 +63,7 @@ public class UsuarioController {
         if (usuario.getNombre() == null || usuario.getNombre().trim().isEmpty()
                 || usuario.getCorreo() == null || usuario.getCorreo().trim().isEmpty()
                 || usuario.getPassword() == null || usuario.getPassword().trim().isEmpty()) {
-            response.put("error", "Los campos 'Nombre', 'email' y 'password' son obligatorios");
+            response.put("error", "Los campos 'nombre', 'correo' y 'password' son obligatorios");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
