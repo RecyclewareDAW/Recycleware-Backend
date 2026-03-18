@@ -1,6 +1,7 @@
 package com.proyecto.daw.repository;
 
 import com.proyecto.daw.model.Donation;
+import com.proyecto.daw.model.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,5 @@ public interface DonationRepository extends JpaRepository<Donation, Integer> {
             "ORDER BY SUM(d.cantidadProductos) DESC")
     List<Object[]> findRankingEmpresas();
 
-    Donation findTopByOrderByFechaDonacionDesc();
+    Donation findTopByEstadoIdAndDonanteRolOrderByFechaDonacionDesc(Integer estadoId, Rol rol);
 }

@@ -223,3 +223,9 @@ INSERT INTO resenas (texto, autor, rol, estrellas, activa) VALUES
     ('Súper sencillo. Subimos el lote de portátiles a la plataforma y en menos de una semana ya estaban asignados a estudiantes locales.', 'EcoSoft Dev', 'EMPRESA', 5, TRUE),
     ('El trato de los voluntarios fue excepcional. Me explicaron cómo instalar todo y el ordenador va perfecto. 100% recomendable.', 'Elena T.', 'PARTICULAR', 4, TRUE),
     ('Nos guiaron en el proceso de borrado seguro de datos antes de entregar los discos duros. Muy profesionales y una gran labor social.', 'Consultoría IT', 'EMPRESA', 5, TRUE);
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (11, 3, 6, 'Donación de mouse', 1.0);
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (5, 3, 8, 'Donación de teclados', 1.0);

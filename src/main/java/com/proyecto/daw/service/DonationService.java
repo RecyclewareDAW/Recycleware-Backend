@@ -2,6 +2,7 @@ package com.proyecto.daw.service;
 
 import com.proyecto.daw.exception.ResourceNotFoundException;
 import com.proyecto.daw.model.Donation;
+import com.proyecto.daw.model.Rol;
 import com.proyecto.daw.model.Usuario;
 import com.proyecto.daw.model.DonationState;
 import com.proyecto.daw.repository.DonationRepository;
@@ -95,7 +96,7 @@ public class DonationService {
 
     // Ultima donación
     public java.util.Map<String, Object> obtenerUltimaDonacionFormateada() {
-        Donation ultima = donationRepository.findTopByOrderByFechaDonacionDesc();
+        Donation ultima = donationRepository.findTopByEstadoIdAndDonanteRolOrderByFechaDonacionDesc(3, Rol.EMPRESA);
 
         if (ultima == null) {
             return null;
