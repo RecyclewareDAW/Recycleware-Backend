@@ -43,7 +43,7 @@ public class SecurityConfig {
                         // 1. ACCESO PÚBLICO (Frontend y API general)
                         .requestMatchers("/auth/**", "/usuario/login", "/contacto", "/donar", "/perfil/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuario").permitAll() 
-                        .requestMatchers(HttpMethod.GET, "/comunidad/resenas", "/donaciones/ranking", "/donaciones/ultima").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/comunidad/resenas", "/donaciones/ranking", "/donaciones/ultima", "/solicitudes/entregadas/count").permitAll()
                         .requestMatchers(HttpMethod.GET, "/productos/**", "/images/**").permitAll()
                         .requestMatchers("/terminos", "/ranking", "/h2-console/**").permitAll()
 
