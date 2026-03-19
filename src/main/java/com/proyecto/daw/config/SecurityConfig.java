@@ -88,7 +88,7 @@ public class SecurityConfig {
                 "http://*.amazonaws.com",
                 "https://*.amazonaws.com"));
         // Puerto por defecto de Vite/React
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:3000"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:3000", "http://localhost:80", "http://172.17.0.1:80"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
