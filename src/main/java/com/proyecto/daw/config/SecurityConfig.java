@@ -41,7 +41,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // --- ACCESO PÚBLICO ---
                 .requestMatchers("/usuario/login", "/usuario", "/contacto", "/auth/login", "/auth/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/productos/**", "/donations/ranking", "/donation-states/**", "/comunidad/resenas").permitAll()
+                .requestMatchers(HttpMethod.GET, "/productos/**", "/donations/ranking", "/donation-states/**", "/comunidad/resenas", "/solicitudes/entregadas/count").permitAll()
                 
                 // --- ROLES ESPECÍFICOS ---
                 // 1. PRODUCTOS: Solo ADMIN puede crear/editar/borrar (si añades esos métodos)

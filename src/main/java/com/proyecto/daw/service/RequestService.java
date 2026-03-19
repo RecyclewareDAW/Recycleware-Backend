@@ -85,9 +85,11 @@ public class RequestService {
 
         // 3. Actualizamos y guardamos
         solicitud.setState(nuevoEstado);
-
-
-
         return requestRepository.save(solicitud);
+    }
+
+    // Cantidad de equipos entregados (Estado 5 = Entregada)
+    public int contarEquiposEntregados() {
+        return requestRepository.countByStateId(5);
     }
 }

@@ -108,4 +108,13 @@ public class RequestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
+    // Cantidad de equipos entregados
+    @GetMapping("/entregadas/count")
+    public ResponseEntity<Map<String, Integer>> getEquiposEntregadosCount() {
+        int total = requestService.contarEquiposEntregados();
+        Map<String, Integer> response = new HashMap<>();
+        response.put("total", total);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
