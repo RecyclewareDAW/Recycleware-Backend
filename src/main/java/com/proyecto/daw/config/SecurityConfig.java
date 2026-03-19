@@ -40,32 +40,28 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        // --- 1. ACCESO PÚBLICO ---
-                        .requestMatchers("/auth/**", "/usuario/login", "/usuario", "/contacto").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/comunidad/resenas", "/donaciones/ranking",
-                                "/donaciones/ultima")
-                        .permitAll()
+                        // 1. ACCESO PÚBLICO (Frontend y API general)
+                        .requestMatchers("/auth/**", "/usuario/login", "/contacto", "/donar", "/perfil/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll() 
+                        .requestMatchers(HttpMethod.GET, "/comunidad/resenas", "/donaciones/ranking", "/donaciones/ultima").permitAll()
                         .requestMatchers(HttpMethod.GET, "/productos/**", "/images/**").permitAll()
                         .requestMatchers("/terminos", "/ranking", "/h2-console/**").permitAll()
 
-                        // --- 2. ACCESO SOLO PARA ADMIN (REGLAS ESPECÍFICAS PRIMERO) ---
-                        // Ponemos el cambio de estado ARRIBA para que sea lo primero que compruebe
-                        .requestMatchers(HttpMethod.PUT, "/solicitudes/*/status", "/donaciones/*/status")
-                        .hasRole("ADMIN")
+                        // 2. ACCESO ADMIN (Gestión y CRUDs)
+                        .requestMatchers(HttpMethod.PUT, "/solicitudes/*/status", "/donaciones/*/status").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/donaciones/**", "/solicitudes/**").hasRole("ADMIN")
-                        .requestMatchers("/solicitudes/todas", "/donaciones").hasRole("ADMIN")
-                        .requestMatchers("/contacto/todos", "/usuario/count", "/usuario").hasRole("ADMIN")
+                        .requestMatchers("/solicitudes/todas", "/contacto/todos", "/usuario/count").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/usuario").hasRole("ADMIN") 
                         .requestMatchers(HttpMethod.POST, "/productos/**").hasRole("ADMIN")
 
-                        // --- 3. ACCESO AUTENTICADO (REGLAS GENERALES DESPUÉS) ---
-                        .requestMatchers("/usuario/perfil", "/usuario/cambiar-password", "/auth/check").authenticated()
+                        // 3. ACCESO AUTENTICADO (Área personal del usuario/empresa)
+                        .requestMatchers("/auth/check", "/usuario/perfil", "/usuario/cambiar-password").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/usuario").authenticated()
-
-                        // Ahora /solicitudes/** solo dejará pasar lo que NO sea un status de Admin
                         .requestMatchers("/solicitudes/**", "/donaciones/**").authenticated()
                         .requestMatchers("/donation-states/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/usuario/**").authenticated()
 
-                        // --- 4. CIERRE DE SEGURIDAD ---
+                        // 4. CIERRE
                         .anyRequest().authenticated())
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .httpBasic(Customizer.withDefaults());
