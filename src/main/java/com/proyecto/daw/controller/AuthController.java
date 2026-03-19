@@ -25,7 +25,6 @@ public class AuthController {
     private final AuthenticationManager authManager;
     private final UsuarioRepository usuarioRepository;
 
-    // Inyectamos el AuthenticationManager que definimos en SecurityConfig
     public AuthController(AuthenticationManager authManager, UsuarioRepository usuarioRepository) {
         this.authManager = authManager;
         this.usuarioRepository = usuarioRepository;
@@ -47,22 +46,20 @@ public class AuthController {
             HttpSession session = request.getSession(true);
             session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
 
-            // Buscamos el usuario completo para enviar todos los datos al frontend
             Usuario usuario = usuarioRepository.findByCorreo(email);
 
-            // Creamos la respuesta con los nombres exactos que usa tu Frontend
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Login exitoso");
             response.put("id", usuario.getId());
             response.put("nombre", usuario.getNombre());
             response.put("razonSocial", usuario.getRazonSocial());
             response.put("nombreContacto", usuario.getNombreContacto());
-            response.put("correo", usuario.getCorreo()); // Nuestro frontend usa .correo
+            response.put("correo", usuario.getCorreo()); 
             response.put("dni", usuario.getDni());
             response.put("telefono", usuario.getTelefono());
             response.put("direccion", usuario.getDireccion());
             response.put("localidad", usuario.getLocalidad());
-            response.put("codigoPostal", usuario.getCodigoPostal()); // Nuestro frontend usa .codigoPostal
+            response.put("codigoPostal", usuario.getCodigoPostal()); 
             response.put("rol", usuario.getRol());
             response.put("roles", authentication.getAuthorities().toString());
 
@@ -94,7 +91,7 @@ public class AuthController {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         Usuario usuario = usuarioRepository.findByCorreo(userDetails.getUsername());
 
-        // Importante: Enviamos TODO el objeto para que al pulsar F5 no se pierdan datos en el perfil
+        
         Map<String, Object> response = new HashMap<>();
         response.put("id", usuario.getId());
         response.put("nombre", usuario.getNombre());

@@ -15,7 +15,7 @@ public class CommunityController {
     @Autowired
     private ReviewService reviewService;
 
-    // Endpoint: http://localhost:8080/api/comunidad/resenas
+    
     @GetMapping("/resenas")
     public List<Review> getResenas() {
         return reviewService.obtenerResenasActivas();

@@ -25,18 +25,18 @@ public class DonationService {
     @Autowired
     private DonationStateRepository DonationStateRepository;
 
-    // Listar todas
+   
     public List<Donation> findAll() {
         return donationRepository.findAll();
     }
 
-    // Buscar por ID
+    
     public Donation findById(Integer id) {
         return donationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Donación no encontrada con ID: " + id));
     }
 
-    // Listar por usuario
+   
     public List<Donation> findByUsuarioId(Integer UsuarioId) {
         return donationRepository.findByDonanteId(UsuarioId);
     }
@@ -45,13 +45,13 @@ public class DonationService {
         return donationRepository.findRankingEmpresas();
     }
 
-    // Guardar (Crear o Actualizar)
+   
     @Transactional
     public Donation save(Donation donation) {
-        // 1. Forzamos que sea una CREACIÓN
+        
         donation.setId(null);
 
-        // 2. Validamos Donante
+        
         if (donation.getDonante() != null && donation.getDonante().getId() != null) {
             Usuario Usuario = UsuarioRepository.findById(donation.getDonante().getId())
                     .orElseThrow(() -> new ResourceNotFoundException(
@@ -59,7 +59,7 @@ public class DonationService {
             donation.setDonante(Usuario);
         }
 
-        // 3. Validamos Estado
+        
         if (donation.getEstado() != null && donation.getEstado().getId() != null) {
             DonationState state = DonationStateRepository.findById(donation.getEstado().getId())
                     .orElseThrow(() -> new ResourceNotFoundException(
@@ -67,34 +67,34 @@ public class DonationService {
             donation.setEstado(state);
         }
 
-        // 4. Guardamos
+        
         return donationRepository.save(donation);
     }
 
-    // Actualizar estado de la donación
+    
     @Transactional
     public Donation updateStatus(Integer donationId, Integer newStateId) {
-        // Buscamos la donación
+        
         Donation donation = donationRepository.findById(donationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Donación no encontrada"));
 
-        // Buscamos el nuevo estado
+        
         DonationState newState = DonationStateRepository.findById(newStateId)
                 .orElseThrow(() -> new ResourceNotFoundException("Estado no encontrado"));
 
-        // Cambiamos el estado y guardamos
+        
         donation.setEstado(newState);
         return donationRepository.save(donation);
     }
 
-    // Borrar
+    
     @Transactional
     public void delete(Integer id) {
-        Donation donation = findById(id); // Si no existe, lanza la excepción
+        Donation donation = findById(id); 
         donationRepository.delete(donation);
     }
 
-    // Ultima donación
+    
     public java.util.Map<String, Object> obtenerUltimaDonacionFormateada() {
         Donation ultima = donationRepository.findTopByEstadoIdAndDonanteRolOrderByFechaDonacionDesc(3, Rol.EMPRESA);
 
@@ -104,7 +104,6 @@ public class DonationService {
 
         java.util.Map<String, Object> respuesta = new java.util.HashMap<>();
 
-        // Comprobamos si el donante tiene Razón Social (Empresa) o usamos su Nombre (Particular)
         String nombreDonante = ultima.getDonante().getRazonSocial() != null ?
                 ultima.getDonante().getRazonSocial() :
                 ultima.getDonante().getNombre();

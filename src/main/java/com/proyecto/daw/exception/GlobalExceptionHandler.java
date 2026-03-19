@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
         response.put("timestamp", java.time.LocalDateTime.now());
         response.put("status", 400);
         response.put("error", "MethodArgumentNotValidException: Error de validación en valores de los campos");
-        // response.put("message", ex.getMessage());
+       
         response.put("path", request.getRequestURI());
         Map<String, String> errores = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
@@ -75,7 +75,6 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-    // 1. Primero: Recurso no encontrado (404 personalizado)
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleResourceNotFound(
             ResourceNotFoundException ex, HttpServletRequest request) {
@@ -87,7 +86,6 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-    // 2. Segundo: URL no encontrada (404)
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(
             NoHandlerFoundException ex, HttpServletRequest request) {
@@ -99,8 +97,7 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-    // 3. Tercero: Error específico de recurso estático (convertir a 404)
-    @ExceptionHandler(NoResourceFoundException.class)  // Spring Boot 3.x
+    @ExceptionHandler(NoResourceFoundException.class)  
     public ResponseEntity<Map<String, Object>> handleNoResourceFound(
             HttpServletRequest request) {
         Map<String, Object> response = new HashMap<>();
@@ -111,7 +108,6 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-    // 1. Error de tipo de parámetro (400)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Map<String, Object>> handleTypeMismatch(
             MethodArgumentTypeMismatchException ex, HttpServletRequest request) {
@@ -123,7 +119,6 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
-    // 2. Parámetros faltantes (400)
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<Map<String, Object>> handleMissingParams(
             MissingServletRequestParameterException ex, HttpServletRequest request) {
@@ -135,13 +130,11 @@ public class GlobalExceptionHandler {
         response.put("path", request.getRequestURI());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
-    // 4. Cuarto: Error general (500) con detección de 404s disfrazados
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleAllExceptions(
             Exception ex, HttpServletRequest request) {
         String message = ex.getMessage();
         String path = request.getRequestURI();
-        // DETECTAR si es un "404 disfrazado de 500"
         if (isActually404Error(message, path)) {
             Map<String, Object> response = new HashMap<>();
             response.put("timestamp", java.time.LocalDateTime.now());
@@ -151,26 +144,22 @@ public class GlobalExceptionHandler {
             response.put("path", path);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
-        // ES UN VERDADERO ERROR 500
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", java.time.LocalDateTime.now());
         response.put("status", 500);
         response.put("error", "Internal Server Error");
         response.put("message", message);
         response.put("path", path);
-        // Opcional: Solo para desarrollo, incluir más detalles
         if (isDevelopment()) {
             response.put("exception", ex.getClass().getName());
             response.put("stackTrace", getFirstLinesOfStackTrace(ex));
         }
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    // Método auxiliar para detectar 404s disfrazados
     private boolean isActually404Error(String message, String path) {
         if (message == null) {
             return false;
         }
-        // Patrones que indican que es un 404, no un 500
         String lowerMessage = message.toLowerCase();
         return lowerMessage.contains("no static resource")
                 || lowerMessage.contains("no handler found")
@@ -184,8 +173,7 @@ public class GlobalExceptionHandler {
                 && !lowerMessage.contains("connection"));
     }
     private boolean isDevelopment() {
-        // Cambia esto según tu entorno
-        return true;  // o leer de application.properties
+        return true;  
     }
     private List<String> getFirstLinesOfStackTrace(Exception ex) {
         return Arrays.stream(ex.getStackTrace())

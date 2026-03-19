@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
-    // Busca automáticamente solo las reseñas que estén activas
+    
     List<Review> findByActivaTrue();
 }

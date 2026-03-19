@@ -34,7 +34,7 @@ public class ContactController {
             map.put("error", "El asunto de la solicitud no puede estar vacío");
             response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
         } else {
-            // Validamos los campos requeridos como en los demás controller
+           
             if (contact.getNombre() == null || contact.getNombre().trim().isEmpty()
                     || contact.getCorreo() == null || contact.getCorreo().trim().isEmpty()
                     || contact.getMensaje() == null || contact.getMensaje().trim().isEmpty()) {
@@ -42,7 +42,7 @@ public class ContactController {
                 map.put("ERROR", "Los campos 'nombre', 'correo' y 'mensaje' son obligatorios");
                 response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
             } else {
-                // Si todo está bien, guardamos usando el servicio que creamos antes
+              
                 Contact contactPost = contactService.guardarMensaje(contact);
                 
                 Map<String, Object> map = new HashMap<>();
@@ -56,7 +56,6 @@ public class ContactController {
     }
 
     
-    //Mapeo para acceder al endpoint de TODOS los mensajes
     @GetMapping("/todos")
     public ResponseEntity<List<Contact>> getAllMessages() {
         List<Contact> mensajes = contactService.obtenerTodos();

@@ -3,7 +3,6 @@ package com.proyecto.daw.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.daw.model.Usuario;
@@ -15,8 +14,6 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    // @Autowired
-    // private PasswordEncoder passwordEncoder;
 
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
@@ -43,7 +40,6 @@ public class UsuarioService {
     }
 
     public Usuario actualizarUsuario(Usuario datosNuevos) {
-        // 1. Buscamos el original por el ID que viene de React (el ID 4 en tu caso)
         return usuarioRepository.findById(datosNuevos.getId()).map(usuarioExistente -> {
             if (datosNuevos.getCorreo() != null && !datosNuevos.getCorreo().equals(usuarioExistente.getCorreo())) {
                 usuarioExistente.setCorreo(datosNuevos.getCorreo());
@@ -57,8 +53,6 @@ public class UsuarioService {
             usuarioExistente.setNombreContacto(datosNuevos.getNombreContacto());
             usuarioExistente.setRazonSocial(datosNuevos.getRazonSocial());
 
-            // IMPORTANTE: No tocamos el correo ni el DNI.
-            // Como no cambian, Hibernate sabe que es una ACTUALIZACIÓN y no un INSERT.
 
             return usuarioRepository.save(usuarioExistente);
         }).orElse(null);

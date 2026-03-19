@@ -13,12 +13,10 @@ public class Donation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // Relación con modelo Usuario
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_donante") 
     private Usuario donante;
 
-    // Relación con el estado de la donación
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_estado", nullable = false)
     private DonationState estado;

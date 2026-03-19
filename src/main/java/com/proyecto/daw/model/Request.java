@@ -31,13 +31,11 @@ public class Request implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private int id;
 
-    // Relación con el Usuario (el que pide el equipo)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_solicitante", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Usuario applicant; // "solicitante" en inglés
+    private Usuario applicant; 
 
-    // Relación con el Producto (el equipo que se pide)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -46,13 +44,11 @@ public class Request implements Serializable {
     @Column(name = "motivo", nullable = false, columnDefinition = "TEXT")
     private String reason; 
 
-    // Relación con el Estado (Pendiente, Aprobada, etc.)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_estado", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties("requests") 
     private RequestState state; 
 
-    // Fecha automáticamente (CURRENT_TIMESTAMP)
     @Column(name = "fecha_solicitud", insertable = false, updatable = false)
     private LocalDateTime requestDate;
 }

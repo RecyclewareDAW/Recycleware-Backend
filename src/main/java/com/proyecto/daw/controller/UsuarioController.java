@@ -40,7 +40,7 @@ public class UsuarioController {
         Map<String, Object> obj = new HashMap<>();
         obj.put("Usuarios", usuarioService.count());
 
-        return obj; // Se mapea automáticamente a JSON usando Jackson
+        return obj; 
     }
 
     @GetMapping("/name/contiene/{cadena}")
@@ -48,7 +48,6 @@ public class UsuarioController {
         return usuarioService.findByNameContaining(name);
     }
 
-    // AÑADIR USUARIO POST
 
     @PostMapping("")
     public ResponseEntity<Map<String, Object>> createUsuario(@Valid @RequestBody Usuario usuario) {
@@ -59,7 +58,6 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-        // Validación manual básica (además de @Valid)
         if (usuario.getNombre() == null || usuario.getNombre().trim().isEmpty()
                 || usuario.getCorreo() == null || usuario.getCorreo().trim().isEmpty()
                 || usuario.getPassword() == null || usuario.getPassword().trim().isEmpty()) {
@@ -68,11 +66,9 @@ public class UsuarioController {
         }
 
         try {
-            // 1. IMPORTANTE: Encriptar la contraseña antes de guardar
             String passwordEncriptada = passwordEncoder.encode(usuario.getPassword());
             usuario.setPassword(passwordEncriptada);
 
-            // 2. Guardar usando la instancia inyectada (minúscula)
             Usuario usuPost = usuarioService.save(usuario);
 
             response.put("mensaje", "Usuario creado con éxito");
@@ -85,27 +81,20 @@ public class UsuarioController {
         }
     }
 
-    // LOGIN DE USUARIO
     @PostMapping("/login")
-    // lo que enviamos desde el login lo guardamos en un map llamado credenciales
-    // para utilizarlo
     public ResponseEntity<Map<String, Object>> loginUsuario(@RequestBody Map<String, String> credenciales) {
         String correo = credenciales.get("email");
         String password = credenciales.get("password");
 
-        // creamos un nuevo mapa para guardar la respuesta
         Map<String, Object> response = new HashMap<>();
 
-        // buscamos al usuario por su correo
         Usuario usuario = usuarioService.findByCorreo(correo);
 
-        // comprobamos si el usuario y la contraseña son correctos
         if (usuario == null || !passwordEncoder.matches(password, usuario.getPassword())) {
             response.put("error", "Correo o contraseña incorrectos");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
-        // si esta ok
         response.put("mensaje", "Login exitoso");
         response.put("usuario", usuario);
 
@@ -114,7 +103,7 @@ public class UsuarioController {
 
     @PutMapping
     public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuarioActualizado) {
-        // El Service ahora es el que hace el trabajo inteligente
+       
         Usuario usuarioGuardado = usuarioService.actualizarUsuario(usuarioActualizado);
 
         if (usuarioGuardado == null) {
@@ -133,14 +122,11 @@ public class UsuarioController {
 
         Usuario usuario = usuarioService.findById(id);
 
-        // Comparación segura usando el PasswordEncoder de Spring Security
-        // passwordEncoder.matches(textoPlano, textoEncriptadoEnBD)
         if (!passwordEncoder.matches(actual, usuario.getPassword())) {
             response.put("error", "La contraseña actual no es correcta.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
-        // Encriptamos la nueva contraseña antes de guardarla
         usuario.setPassword(passwordEncoder.encode(nueva));
         usuarioService.save(usuario);
 

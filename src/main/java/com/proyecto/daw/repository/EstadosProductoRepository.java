@@ -12,24 +12,6 @@ import com.proyecto.daw.model.EstadosProducto;
 @Repository
 public interface EstadosProductoRepository extends JpaRepository<EstadosProducto, Integer> {
 
-    // ****************************
-    // Métodos HEREDADOS
-    // ****************************
-    /*
-     * findAll()
-     * findById(id)
-     * 
-     * count()
-     * delete(User)
-     * deleteById(id)
-     * deleteAll()
-     * 
-     * equals(User)
-     * exist(User)
-     * existById(id)
-     */
-
-
     @Query(value = "SELECT nombre FROM estados_producto", nativeQuery = true)
     List<String> findAllNames(); 
 

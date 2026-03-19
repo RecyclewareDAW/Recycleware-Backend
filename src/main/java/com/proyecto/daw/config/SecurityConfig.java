@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,34 +37,33 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        // --- 1. REGLAS DE ADMIN (Lo más sensible primero) ---
+                        
                         .requestMatchers("/h2-console/**").hasRole("ADMIN")
                         .requestMatchers("/contacto/todos/**", "/contacto/todos").hasRole("ADMIN")
                         .requestMatchers("/solicitudes/todas", "/usuario/count").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/usuario").hasRole("ADMIN") // Ver lista de todos
+                        .requestMatchers(HttpMethod.GET, "/usuario").hasRole("ADMIN") 
                         .requestMatchers(HttpMethod.PUT, "/solicitudes/*/status", "/donaciones/*/status").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/donaciones/**", "/solicitudes/**").hasRole("ADMIN")
                         
-                        // Productos: Solo ADMIN gestiona (POST, PUT, DELETE)
+                     
                         .requestMatchers(HttpMethod.POST, "/productos/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/productos/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/productos/**").hasRole("ADMIN")
 
-                        // --- 2. REGLAS PÚBLICAS (Lo que cualquiera puede ver) ---
+                       
                         .requestMatchers("/auth/**", "/usuario/login", "/contacto", "/donar", "/perfil/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll() // Registro
+                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll()
                         .requestMatchers(HttpMethod.GET, "/comunidad/resenas", "/donaciones/ranking", "/donaciones/ultima", "/solicitudes/entregadas/count").permitAll()
                         .requestMatchers(HttpMethod.GET, "/productos/**", "/images/**").permitAll()
                         .requestMatchers("/terminos", "/ranking").permitAll()
 
-                        // --- 3. REGLAS DE USUARIO AUTENTICADO (Área personal) ---
-                        // El "PUT /usuario" permite que tú actualices tu propio perfil
+                        
                         .requestMatchers(HttpMethod.PUT, "/usuario").authenticated()
                         .requestMatchers("/auth/check", "/usuario/perfil", "/usuario/cambiar-password", "/usuario/update-password").authenticated()
                         .requestMatchers("/solicitudes/**", "/donaciones/**", "/donation-states/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/usuario/**").authenticated() // Ver detalles de perfil propio
+                        .requestMatchers(HttpMethod.GET, "/usuario/**").authenticated() 
 
-                        // --- 4. CIERRE DE SEGURIDAD ---
+                     
                         .anyRequest().authenticated())
 
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
@@ -87,7 +85,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Puerto por defecto de Vite/React
+        
         configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));

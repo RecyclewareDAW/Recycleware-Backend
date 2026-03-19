@@ -24,8 +24,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString(exclude = {"estado", "categoria"})           // Excluir del toString para evitar recursividad
-@EqualsAndHashCode(exclude = {"estado", "categoria"})  // Excluir de equals y hashCode para evitar recursividad
+@ToString(exclude = {"estado", "categoria"})       
+@EqualsAndHashCode(exclude = {"estado", "categoria"}) 
 @Entity
 @Table(name = "productos")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 

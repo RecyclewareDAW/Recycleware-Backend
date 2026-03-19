@@ -12,23 +12,6 @@ import com.proyecto.daw.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-    // ****************************
-    // Métodos HEREDADOS
-    // ****************************
-    /*
-     * findAll()
-     * findById(id)
-     * 
-     * count()
-     * delete(Usuario)
-     * deleteById(id)
-     * deleteAll()
-     * 
-     * equals(Usuario)
-     * exist(Usuario)
-     * existById(id)
-     */
-
     @Query(value = "SELECT * FROM usuarios WHERE id = :id", nativeQuery = true)
     Usuario findById(@Param("id") int UsuarioId);
 

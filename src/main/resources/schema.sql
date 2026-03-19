@@ -116,6 +116,6 @@ CREATE TABLE resenas (
     autor VARCHAR(80) NOT NULL,
     rol VARCHAR(45) NOT NULL,
     estrellas INT DEFAULT 5,
-    activa BOOLEAN DEFAULT TRUE, -- Para que el admin pueda ocultar reseñas inapropiadas
+    activa BOOLEAN DEFAULT TRUE,
     PRIMARY KEY (id)
 );

@@ -21,19 +21,17 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // 1. Buscamos por correo (como vimos en tu UsuarioController)
+   
         Usuario usuario = userRepository.findByCorreo(email);
         
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuario no encontrado con el correo: " + email);
         }
 
-        // 2. Cargamos el rol que viene de nuestra base de datos (ADMIN, EMPRESA o PARTICULAR)
-        // Spring Security añadirá el prefijo ROLE_ internamente
         String rolActual = usuario.getRol().name(); 
 
         return User.withUsername(usuario.getCorreo())
-                .password(usuario.getPassword()) // Usamos el nombre de tu campo en la DB
+                .password(usuario.getPassword()) 
                 .authorities("ROLE_" + rolActual) 
                 .build();
     }
