@@ -1,4 +1,7 @@
--- Datos iniciales para Recycleware
+
+----------------------------------------------------------------------
+----------------------Definición de tablas----------------------------
+----------------------------------------------------------------------
 
 -- Categorías
 INSERT INTO categorias_producto (nombre) VALUES ('Periféricos');
@@ -24,31 +27,87 @@ INSERT INTO estados_solicitud (nombre) VALUES ('Aprobada');
 INSERT INTO estados_solicitud (nombre) VALUES ('Denegada');
 INSERT INTO estados_solicitud (nombre) VALUES ('Entregada');
 
+-- Estados de donaciones
+INSERT INTO estados_donacion (id, nombre) VALUES (1, 'Pendiente');
+INSERT INTO estados_donacion (id, nombre) VALUES (2, 'En Recogida');
+INSERT INTO estados_donacion (id, nombre) VALUES (3, 'Recibido');
+INSERT INTO estados_donacion (id, nombre) VALUES (4, 'Procesado');
+
+----------------------------------------------------------------------
+--------------------------Datos iniciales para Recycleware------------
+----------------------------------------------------------------------
+
+
 -- Usuarios de prueba (contraseña: 1234 para todo (hasheada))
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
+-- VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Falsa 123', 'Alicante', '03001', 'ADMIN');
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
+-- VALUES ('Empresa', '12345635X', '600111222', 'empresa@recycleware.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Recycleware SL', 'Recycle', 'EMPRESA');
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
+-- VALUES ('Particular', '12345675X', '600111222', 'particular@ejemplo.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
+-- 
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
+-- VALUES ('Bela', '12345645X', '600111222', 'bela@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
+-- 
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
+-- VALUES ('Empresa Bela', '72345635X', '600111222', 'bela@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Empresa de Bela', 'Ree', 'EMPRESA');
+-- 
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
+-- VALUES ('Bela', '19345675X', '600111222', 'bela@admin.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'ADMIN');
+-- 
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
+-- VALUES ('Bela emproesa 2', '12345935X', '600111222', 'bela@empresa2.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Otra emporesa', 'Recycle', 'EMPRESA');
+-- 
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
+-- VALUES ('Bela emproesa 3', '12345035X', '600111222', 'bela@empresa3.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa terceera', 'Recycle', 'EMPRESA');
+-- 
+-- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
+-- VALUES ('Bela emproesa 4', '12355035X', '600111222', 'bela@empresa4.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa cuarta', 'Recycle', 'EMPRESA');
+
+
+-- Datos Usuario Finales
+
+--Bela
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Admin', '12345678X', '600111222', 'admin@recycleware.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Falsa 123', 'Alicante', '03001', 'ADMIN');
+VALUES ('Bela Part', '12345645X', '600111222', 'bela.part@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
+
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Empresa', '12345635X', '600111222', 'empresa@recycleware.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Recycleware SL', 'Recycle', 'EMPRESA');
+VALUES ('Bela Emp', '12345222X', '600111223', 'bela.emp@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'BelaWare SL', 'Bela Sim', 'EMPRESA');
+
+--Luis
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Particular', '12345675X', '600111222', 'particular@ejemplo.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
+VALUES ('Luis Part', '124445645X', '600111222', 'luis.part@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
 
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
+VALUES ('Gines Emp', '12112222X', '600111223', 'Gines.emp@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Gines SL', 'Luis Ginés', 'EMPRESA');
+
+--Ricardo
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Bela', '12345645X', '600111222', 'bela@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
+VALUES ('Ricardo Part', '12345678A', '600111222', 'ricardo.part@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Empresa Bela', '72345635X', '600111222', 'bela@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Empresa de Bela', 'Ree', 'EMPRESA');
+VALUES ('Ricardo Emp', '12345222F', '600111223', 'ricardo.emp@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Piolaware SL', 'Ricardo', 'EMPRESA');
 
+--Aaron
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Bela', '19345675X', '600111222', 'bela@admin.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'ADMIN');
+VALUES ('Aaron Part', '12348765J', '600111222', 'aaron.part@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Bela emproesa 2', '12345935X', '600111222', 'bela@empresa2.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Otra emporesa', 'Recycle', 'EMPRESA');
+VALUES ('Aaron Emp', '43345909X', '600111223', 'aaron.emp@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Aaronsoft SL', 'Aaron', 'EMPRESA');
+
+-- Empresas extra
+
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Bela emproesa 3', '12345035X', '600111222', 'bela@empresa3.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa terceera', 'Recycle', 'EMPRESA');
+VALUES ('SoftAlacant', '43345902E', '600111223', 'soft.alacant@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'SoftAlacant SL', 'Alfonso C', 'EMPRESA');
+
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
-VALUES ('Bela emproesa 4', '12355035X', '600111222', 'bela@empresa4.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Una empresa cuarta', 'Recycle', 'EMPRESA');
+VALUES ('Doctorbalmis', '43445905S', '600222223', 'balmis@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'IES Doctorbalmis', 'Javier Catalá', 'EMPRESA');
+
+
+
+
 
 
 ------------------------------------------------------
@@ -93,12 +152,6 @@ VALUES ('Lenovo G500s', 2, 1, 1, '8Gb Ram 320Gb Hdd y webcam integrada', 'http:/
 
 
 
--- Estados de donaciones
-INSERT INTO estados_donacion (id, nombre) VALUES (1, 'Pendiente');
-INSERT INTO estados_donacion (id, nombre) VALUES (2, 'En Recogida');
-INSERT INTO estados_donacion (id, nombre) VALUES (3, 'Recibido');
-INSERT INTO estados_donacion (id, nombre) VALUES (4, 'Procesado');
-
 -- Donaciones de prueba
 
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
@@ -118,65 +171,144 @@ VALUES (2, 3, 50, 'Donación de prueba Empresa A', 10.0);
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
 VALUES (5, 3, 30, 'Donación de prueba Empresa B', 5.0);
 
+-- Donacoipnes finales
 
+-- Bela recibidas
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (2, 3, 50, 'Donación de sets de ordenador con torres, ratones, teclados y monitores', 70.0);
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (2, 3, 10, 'Donación de monitores', 20.0);
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (2, 3, 5, 'Donación de portatiles', 10.0);
+
+-- Luis 
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (4, 3, 20, 'Donación de diversos componentes y periféricos', 25.0);
+
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (4, 2, 50, 'Donación de sets de ratones y teclados', 10.0);
+
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (4, 1, 35 'Donación de 3 torres', 25.0);
+
+
+-- Ricardo 
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (6, 3, 65, 'Donación de diversos componentes y periféricos', 25.0);
+
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (6, 2, 50, 'Donación de sets de ratones y teclados', 10.0);
+
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (6, 1, 35 'Donación de torres', 25.0);
+
+
+-- Aaron
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (8, 3, 40, 'Donación de diversos componentes y periféricos', 25.0);
+
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (8, 2, 50, 'Donación de sets de ratones y teclados', 10.0);
+
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (8, 1, 35 'Donación de torres', 25.0);
+
+-- Donaciones varias
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (9, 3, 50, 'Donación variada', 70.0);
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (9, 3, 10, 'Donación de monitores', 20.0);
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (10, 3, 5, 'Donación de portatiles', 10.0);
+
+INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
+VALUES (10, 3, 35 'Donación de 3 torres', 25.0);
 
 ------------------------------------------------------
 -- Solicitudes de productos --------------------------
 ------------------------------------------------------
 
--- 1. El usuario 'Particular' (ID 3) solicita un Monitor Dell (ID 7)
--- Estado: 1 (Pendiente)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 7, 'Necesito un monitor para que mi hijo pueda realizar sus tareas escolares en casa, ya que el nuestro se rompió.', 1);
+---- 1. El usuario 'Particular' (ID 3) solicita un Monitor Dell (ID 7)
+---- Estado: 1 (Pendiente)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 7, 'Necesito un monitor para que mi hijo pueda realizar sus tareas escolares en casa, ya que el nuestro se rompió.', 1);
+--
+---- 2. El usuario 'Bela' (ID 4) solicita el Portatil HP (ID 9)
+---- Estado: 2 (En Revisión)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 9, 'Estoy realizando un curso de formación online y requiero un equipo portátil para poder seguir las clases y entregar los proyectos.', 2);
+--
+---- 3. El usuario 'Particular' (ID 3) solicita el Ratón Acer (ID 1)
+---- Estado: 3 (Aprobada)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 1, 'Mi ratón actual ha dejado de funcionar y no tengo recursos para adquirir uno nuevo en este momento.', 3);
+--
+---- 4. El usuario 'Bela' (ID 4) solicita la Torre PCGAM Slim (ID 3)
+---- Estado: 4 (Denegada)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 3, 'Solicito este equipo para montar un servidor doméstico de pruebas.', 4);
+--
+---- 5. El usuario 'Particular' (ID 3) solicita el Altavoz MiFa (ID 2)
+---- Estado: 5 (Entregada)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 2, 'Necesito un dispositivo de audio para mis clases de idiomas online.', 5);
 
--- 2. El usuario 'Bela' (ID 4) solicita el Portatil HP (ID 9)
--- Estado: 2 (En Revisión)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 9, 'Estoy realizando un curso de formación online y requiero un equipo portátil para poder seguir las clases y entregar los proyectos.', 2);
 
--- 3. El usuario 'Particular' (ID 3) solicita el Ratón Acer (ID 1)
--- Estado: 3 (Aprobada)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 1, 'Mi ratón actual ha dejado de funcionar y no tengo recursos para adquirir uno nuevo en este momento.', 3);
 
--- 4. El usuario 'Bela' (ID 4) solicita la Torre PCGAM Slim (ID 3)
--- Estado: 4 (Denegada)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 3, 'Solicito este equipo para montar un servidor doméstico de pruebas.', 4);
+-- SOlicitudes finales
 
--- 5. El usuario 'Particular' (ID 3) solicita el Altavoz MiFa (ID 2)
--- Estado: 5 (Entregada)
 INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 2, 'Necesito un dispositivo de audio para mis clases de idiomas online.', 5);
+VALUES (1, 6, 'Necesito un monitor para que mi hijo pueda realizar sus tareas escolares en casa, ya que el nuestro se rompió.', 1);
+
+
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (3, 3, 'Solicito este equipo para montar un servidor doméstico de pruebas.', 4);
+
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (5, 1, 'Mi ratón actual ha dejado de funcionar y no tengo recursos para adquirir uno nuevo en este momento.', 3);
+
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+VALUES (7, 8, 'Necesito un portatil para estudiar online el modulo semipresencial.', 5);
 
 ------------------------------------------------------
 -- Más Solicitudes para el Usuario ID 4 (Bela) -------
 ------------------------------------------------------
 
--- 1. Solicita el Monitor VSDISPLAY (ID 8)
--- Estado: 1 (Pendiente)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 8, 'Necesito un segundo monitor para mejorar mi productividad mientras estudio programación.', 1);
-
--- 2. Solicita el Procesador AMD Ryzen (ID 5)
--- Estado: 2 (En Revisión)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 5, 'Mi procesador actual falla constantemente y necesito este componente para reparar mi equipo principal.', 2);
-
--- 3. Solicita el Portatil HP 255 G5 (ID 10)
--- Estado: 3 (Aprobada)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 10, 'Requiero un equipo con más memoria RAM para poder ejecutar máquinas virtuales de mis prácticas.', 3);
-
--- 4. Solicita la Fuente de alimentación Tempest (ID 6)
--- Estado: 5 (Entregada)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 6, 'La fuente de mi ordenador se quemó tras una subida de tensión y necesito esta de sustitución.', 5);
-
--- 5. Solicita la Torre dañada Nox (ID 4)
--- Estado: 4 (Denegada)
-INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
-VALUES (4, 4, 'Me gustaría obtener esta torre para practicar soldadura y reparación de placas base.', 4);
+---- 1. Solicita el Monitor VSDISPLAY (ID 8)
+---- Estado: 1 (Pendiente)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 8, 'Necesito un segundo monitor para mejorar mi productividad mientras estudio programación.', 1);
+--
+---- 2. Solicita el Procesador AMD Ryzen (ID 5)
+---- Estado: 2 (En Revisión)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 5, 'Mi procesador actual falla constantemente y necesito este componente para reparar mi equipo principal.', 2);
+--
+---- 3. Solicita el Portatil HP 255 G5 (ID 10)
+---- Estado: 3 (Aprobada)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 10, 'Requiero un equipo con más memoria RAM para poder ejecutar máquinas virtuales de mis prácticas.', 3);
+--
+---- 4. Solicita la Fuente de alimentación Tempest (ID 6)
+---- Estado: 5 (Entregada)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 6, 'La fuente de mi ordenador se quemó tras una subida de tensión y necesito esta de sustitución.', 5);
+--
+---- 5. Solicita la Torre dañada Nox (ID 4)
+---- Estado: 4 (Denegada)
+--INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado)
+--VALUES (4, 4, 'Me gustaría obtener esta torre para practicar soldadura y reparación de placas base.', 4);
 
 
 ------------------------------------------------------

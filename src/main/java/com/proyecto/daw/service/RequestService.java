@@ -85,9 +85,6 @@ public class RequestService {
 
         // 3. Actualizamos y guardamos
         solicitud.setState(nuevoEstado);
-
-
-
         return requestRepository.save(solicitud);
     }
 
