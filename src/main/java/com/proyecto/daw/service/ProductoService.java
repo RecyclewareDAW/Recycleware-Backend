@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.daw.model.Producto;
+import com.proyecto.daw.repository.DisponibilidadProductoRepository;
 import com.proyecto.daw.repository.ProductoRepository;
 
 @Service
@@ -14,6 +15,9 @@ public class ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private DisponibilidadProductoRepository disponibilidadProductoRepository;
 
 
     
@@ -53,5 +57,15 @@ public class ProductoService {
 
     public Long count() {
         return productoRepository.count();
+    }
+
+    public boolean marcarProductoNoDisponibleById(int id){
+        Producto p = productoRepository.findSqlById(id);
+        if (p == null) {
+            return false;
+        }
+        p.setDisponibilidad(disponibilidadProductoRepository.findSqlById(2));
+        productoRepository.save(p);
+        return true;
     }
 }

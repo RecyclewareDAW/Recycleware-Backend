@@ -1,2 +1,0 @@
-INSERT INTO productos (nombre, id_categoria, id_estado, descripcion, imagen_url)
-VALUES ("Ratón Acer OMW", 0, 0, "Ratón apenas usado con dos botones laterales y boton de cambio de DPI", "https://placehold.co/600x400/orange/white");

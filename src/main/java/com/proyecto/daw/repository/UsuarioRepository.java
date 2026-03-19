@@ -7,34 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.proyecto.daw.model.User;
+import com.proyecto.daw.model.Usuario;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-
-    // ****************************
-    // Métodos HEREDADOS
-    // ****************************
-    /*
-     * findAll()
-     * findById(id)
-     * 
-     * count()
-     * delete(User)
-     * deleteById(id)
-     * deleteAll()
-     * 
-     * equals(User)
-     * exist(User)
-     * existById(id)
-     */
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     @Query(value = "SELECT * FROM usuarios WHERE id = :id", nativeQuery = true)
-    User findById(@Param("id") int userId);
+    Usuario findById(@Param("id") int UsuarioId);
 
     @Query(value = "SELECT * FROM usuarios WHERE UPPER(nombre) LIKE UPPER(CONCAT('%', :cadena, '%')) OR UPPER(razon_social) LIKE UPPER(CONCAT('%', :cadena, '%'))", nativeQuery = true)
-    List<User> findByNameContaining(@Param("cadena") String name);
+    List<Usuario> findByNameContaining(@Param("cadena") String name);
 
     // para que Spring Boot cree el SQL automáticamente: SELECT * FROM usuarios WHERE correo = ?
-    User findByCorreo(String correo);
+    Usuario findByCorreo(String correo);
 }

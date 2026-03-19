@@ -11,22 +11,7 @@ import com.proyecto.daw.model.Producto;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
-    // ****************************
-    // Métodos HEREDADOS
-    // ****************************
-    /*
-     * findAll()
-     * findById(id)
-     * 
-     * count()
-     * delete(User)
-     * deleteById(id)
-     * deleteAll()
-     * 
-     * equals(User)
-     * exist(User)
-     * existById(id)
-     */
+   
 
     @Query(value = "SELECT * FROM productos", nativeQuery = true)
     List<Producto> findSqlAll();
@@ -34,7 +19,4 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     @Query(value = "SELECT * FROM productos WHERE id = :id", nativeQuery = true)
     Producto findSqlById(@Param("id") int id);
 
-
-    // Las queries de pedir productos que pertenezcan a una categoría o tengan un estado se gestionan en el Service por la facilidad para acceder a esos datos 
-    // y no realizar consultas complicadas en el repository
 }

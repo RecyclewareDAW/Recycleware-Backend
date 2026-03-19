@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS productos;
 DROP TABLE IF EXISTS estados_solicitud;
 DROP TABLE IF EXISTS estados_producto;
 DROP TABLE IF EXISTS disponibilidad_producto;
+DROP TABLE IF EXISTS estados_donacion;
 DROP TABLE IF EXISTS categorias_producto;
 DROP TABLE IF EXISTS usuarios;
 
@@ -17,7 +18,7 @@ CREATE TABLE usuarios (
     correo          VARCHAR(80) NOT NULL UNIQUE,
     contrasenia     VARCHAR(80) NOT NULL,
     direccion       VARCHAR(80) NOT NULL,
-    provincia       VARCHAR(80) NOT NULL,
+    localidad       VARCHAR(80) NOT NULL,
     codigo_postal   VARCHAR(10) NOT NULL,
     razon_social    VARCHAR(80) DEFAULT NULL,
     nombre_contacto VARCHAR(80) DEFAULT NULL,
@@ -68,7 +69,7 @@ CREATE TABLE productos (
 
 CREATE TABLE estados_donacion (
     id INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(45) NOT NULL, -- Ej: 'Pendiente', 'En Recogida', 'Recibida', 'Procesada'
+    nombre VARCHAR(45) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -80,7 +81,6 @@ CREATE TABLE donaciones (
     cantidad_productos INT DEFAULT 1,
     descripcion TEXT NOT NULL,
     peso FLOAT NULL,
-    volumen FLOAT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_donante) REFERENCES usuarios(id),
     FOREIGN KEY (id_estado) REFERENCES estados_donacion(id)
@@ -108,4 +108,14 @@ CREATE TABLE mensajes_contacto (
     fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+);
+
+CREATE TABLE resenas (
+    id INT NOT NULL AUTO_INCREMENT,
+    texto TEXT NOT NULL,
+    autor VARCHAR(80) NOT NULL,
+    rol VARCHAR(45) NOT NULL,
+    estrellas INT DEFAULT 5,
+    activa BOOLEAN DEFAULT TRUE,
+    PRIMARY KEY (id)
 );

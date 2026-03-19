@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "usuarios") // Nombre de la tabla
+@Table(name = "usuarios") 
 @Data 
-public class User {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,7 +30,7 @@ public class User {
     private String direccion;
 
     @Column(nullable = false, length = 80)
-    private String provincia;
+    private String localidad;
 
     @Column(name = "codigo_postal", nullable = false, length = 10)
     private String codigoPostal;

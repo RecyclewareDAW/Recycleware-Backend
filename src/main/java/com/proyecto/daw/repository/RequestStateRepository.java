@@ -1,10 +1,10 @@
 package com.proyecto.daw.repository;
 
-import com.proyecto.daw.model.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.proyecto.daw.model.RequestState;
+
 @Repository
-public interface ContactRepository extends JpaRepository<Contact, Integer> {
-    
+public interface RequestStateRepository extends JpaRepository<RequestState, Integer> {
 }
