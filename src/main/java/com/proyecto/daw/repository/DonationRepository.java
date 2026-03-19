@@ -23,5 +23,9 @@ public interface DonationRepository extends JpaRepository<Donation, Integer> {
             "ORDER BY SUM(d.cantidadProductos) DESC")
     List<Object[]> findRankingEmpresas();
 
+    @Query("SELECT d FROM Donation d WHERE d.estado.id IN :estadoIds AND d.donante.rol = :rol ORDER BY d.fechaDonacion DESC")
+    List<Donation> findLatestByEstadosAndRol(java.util.List<Integer> estadoIds, Rol rol, org.springframework.data.domain.Pageable pageable);
+
+    // Método legacy (puedes dejarlo o quitarlo, pero lo usaremos en el service)
     Donation findTopByEstadoIdAndDonanteRolOrderByFechaDonacionDesc(Integer estadoId, Rol rol);
 }

@@ -90,4 +90,8 @@ public class RequestService {
 
         return requestRepository.save(solicitud);
     }
+
+    public long contarSolicitudesEntregadas() {
+        return requestRepository.countByStateId(5);
+    }
 }

@@ -96,18 +96,27 @@ public class DonationService {
 
     // Ultima donación
     public java.util.Map<String, Object> obtenerUltimaDonacionFormateada() {
-        Donation ultima = donationRepository.findTopByEstadoIdAndDonanteRolOrderByFechaDonacionDesc(3, Rol.EMPRESA);
-
-        if (ultima == null) {
-            return null;
-        }
+        // Buscamos la última donación de empresa que esté en estado 'Recibido' (3) o 'Procesado' (4)
+        java.util.List<Integer> estadosValidos = java.util.Arrays.asList(3, 4);
+        org.springframework.data.domain.Pageable limitOne = org.springframework.data.domain.PageRequest.of(0, 1);
+        
+        java.util.List<Donation> resultado = donationRepository.findLatestByEstadosAndRol(estadosValidos, Rol.EMPRESA, limitOne);
+        Donation ultima = resultado.isEmpty() ? null : resultado.get(0);
 
         java.util.Map<String, Object> respuesta = new java.util.HashMap<>();
 
+        if (ultima == null) {
+            // Devolvemos datos por defecto en lugar de null para no romper el frontend
+            respuesta.put("donante", "Empresa Colaboradora");
+            respuesta.put("cantidad", 0);
+            respuesta.put("categoria", "Equipos informáticos");
+            return respuesta;
+        }
+
         // Comprobamos si el donante tiene Razón Social (Empresa) o usamos su Nombre (Particular)
-        String nombreDonante = ultima.getDonante().getRazonSocial() != null ?
+        String nombreDonante = (ultima.getDonante() != null && ultima.getDonante().getRazonSocial() != null) ?
                 ultima.getDonante().getRazonSocial() :
-                ultima.getDonante().getNombre();
+                (ultima.getDonante() != null ? ultima.getDonante().getNombre() : "Donante Anónimo");
 
         respuesta.put("donante", nombreDonante);
         respuesta.put("cantidad", ultima.getCantidadProductos());

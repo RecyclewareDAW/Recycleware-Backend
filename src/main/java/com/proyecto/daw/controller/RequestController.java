@@ -108,4 +108,13 @@ public class RequestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
+    // 5. ENDPOINT PARA EL CONTADOR DE IMPACTO (PÚBLICO)
+    @GetMapping("/entregadas/count")
+    public ResponseEntity<Map<String, Long>> getEntregadasCount() {
+        long count = requestService.contarSolicitudesEntregadas();
+        Map<String, Long> response = new HashMap<>();
+        response.put("total", count);
+        return ResponseEntity.ok(response);
+    }
 }
