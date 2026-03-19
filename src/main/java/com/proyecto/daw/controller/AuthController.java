@@ -94,25 +94,26 @@ public class AuthController {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         Usuario usuario = usuarioRepository.findByCorreo(userDetails.getUsername());
 
-        // Importante: También aquí enviamos todo para que al pulsar F5 no se rompa nada
+        // Importante: Enviamos TODO el objeto para que al pulsar F5 no se pierdan datos en el perfil
         Map<String, Object> response = new HashMap<>();
         response.put("id", usuario.getId());
         response.put("nombre", usuario.getNombre());
+        response.put("razonSocial", usuario.getRazonSocial());
+        response.put("nombreContacto", usuario.getNombreContacto());
         response.put("correo", usuario.getCorreo());
+        response.put("dni", usuario.getDni());
+        response.put("telefono", usuario.getTelefono());
+        response.put("direccion", usuario.getDireccion());
+        response.put("localidad", usuario.getLocalidad());
         response.put("codigoPostal", usuario.getCodigoPostal());
         response.put("rol", usuario.getRol());
         response.put("roles", auth.getAuthorities().toString());
-        // Añade aquí telefono o direccion si los necesitas en el estado global
 
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/check")
-    public ResponseEntity<?> checkSession(Authentication authentication) {
-        if (authentication != null && authentication.isAuthenticated()) {
-            // Devolvemos un Map vacío para que sea un JSON válido "{}"
-            return ResponseEntity.ok(new HashMap<>());
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    public ResponseEntity<?> checkSession() {
+        return getCurrentUser();
     }
 }

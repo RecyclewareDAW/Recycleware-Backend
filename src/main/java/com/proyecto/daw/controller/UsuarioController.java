@@ -63,7 +63,7 @@ public class UsuarioController {
         if (usuario.getNombre() == null || usuario.getNombre().trim().isEmpty()
                 || usuario.getCorreo() == null || usuario.getCorreo().trim().isEmpty()
                 || usuario.getPassword() == null || usuario.getPassword().trim().isEmpty()) {
-            response.put("error", "Los campos 'nombre', 'correo' y 'password' son obligatorios");
+            response.put("error", "Los campos 'Nombre', 'email' y 'password' son obligatorios");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
@@ -90,17 +90,17 @@ public class UsuarioController {
     // lo que enviamos desde el login lo guardamos en un map llamado credenciales
     // para utilizarlo
     public ResponseEntity<Map<String, Object>> loginUsuario(@RequestBody Map<String, String> credenciales) {
-        String emailFrontend = credenciales.get("email");
-        String passwordFrontend = credenciales.get("password");
+        String correo = credenciales.get("email");
+        String password = credenciales.get("password");
 
         // creamos un nuevo mapa para guardar la respuesta
         Map<String, Object> response = new HashMap<>();
 
         // buscamos al usuario por su correo
-        Usuario usuario = usuarioService.findByCorreo(emailFrontend);
+        Usuario usuario = usuarioService.findByCorreo(correo);
 
         // comprobamos si el usuario y la contraseña son correctos
-        if (usuario == null || !passwordEncoder.matches(passwordFrontend, usuario.getPassword())) {
+        if (usuario == null || !passwordEncoder.matches(password, usuario.getPassword())) {
             response.put("error", "Correo o contraseña incorrectos");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }

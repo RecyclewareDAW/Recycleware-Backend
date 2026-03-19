@@ -85,10 +85,14 @@ public class RequestService {
 
         // 3. Actualizamos y guardamos
         solicitud.setState(nuevoEstado);
+
+
+
         return requestRepository.save(solicitud);
     }
 
-    public long contarSolicitudesEntregadas() {
-        return requestRepository.countByStateId(5);
+    // Método para contar las solicitudes entregadas
+    public long countEntregadas() {
+        return requestRepository.countByStateName("Entregada");
     }
 }

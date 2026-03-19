@@ -109,10 +109,10 @@ public class RequestController {
         }
     }
 
-    // 5. ENDPOINT PARA EL CONTADOR DE IMPACTO (PÚBLICO)
+    // 5. ENDPOINT PARA EL HOME: Contar solicitudes entregadas
     @GetMapping("/entregadas/count")
-    public ResponseEntity<Map<String, Long>> getEntregadasCount() {
-        long count = requestService.contarSolicitudesEntregadas();
+    public ResponseEntity<Map<String, Long>> countEntregadas() {
+        long count = requestService.countEntregadas();
         Map<String, Long> response = new HashMap<>();
         response.put("total", count);
         return ResponseEntity.ok(response);

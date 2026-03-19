@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,7 +22,6 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity // Bela
 public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
@@ -40,29 +38,36 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        // 1. ACCESO PÚBLICO (Frontend y API general)
-                        .requestMatchers("/auth/**", "/usuario/login", "/contacto", "/donar", "/perfil/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll() 
-                        .requestMatchers(HttpMethod.GET, "/comunidad/resenas", "/donaciones/ranking", "/donaciones/ultima", "/solicitudes/entregadas/count").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/productos/**", "/images/**").permitAll()
-                        .requestMatchers("/terminos", "/ranking", "/h2-console/**").permitAll()
-
-                        // 2. ACCESO ADMIN (Gestión y CRUDs)
+                        // --- 1. REGLAS DE ADMIN (Lo más sensible primero) ---
+                        .requestMatchers("/h2-console/**").hasRole("ADMIN")
+                        .requestMatchers("/contacto/todos/**", "/contacto/todos").hasRole("ADMIN")
+                        .requestMatchers("/solicitudes/todas", "/usuario/count").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/usuario").hasRole("ADMIN") // Ver lista de todos
                         .requestMatchers(HttpMethod.PUT, "/solicitudes/*/status", "/donaciones/*/status").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/donaciones/**", "/solicitudes/**").hasRole("ADMIN")
-                        .requestMatchers("/solicitudes/todas", "/contacto/todos", "/usuario/count").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/usuario").hasRole("ADMIN") 
+                        
+                        // Productos: Solo ADMIN gestiona (POST, PUT, DELETE)
                         .requestMatchers(HttpMethod.POST, "/productos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/productos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/productos/**").hasRole("ADMIN")
 
-                        // 3. ACCESO AUTENTICADO (Área personal del usuario/empresa)
-                        .requestMatchers("/auth/check", "/usuario/perfil", "/usuario/cambiar-password").authenticated()
+                        // --- 2. REGLAS PÚBLICAS (Lo que cualquiera puede ver) ---
+                        .requestMatchers("/auth/**", "/usuario/login", "/contacto", "/donar", "/perfil/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuario").permitAll() // Registro
+                        .requestMatchers(HttpMethod.GET, "/comunidad/resenas", "/donaciones/ranking", "/donaciones/ultima", "/solicitudes/entregadas/count").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/productos/**", "/images/**").permitAll()
+                        .requestMatchers("/terminos", "/ranking").permitAll()
+
+                        // --- 3. REGLAS DE USUARIO AUTENTICADO (Área personal) ---
+                        // El "PUT /usuario" permite que tú actualices tu propio perfil
                         .requestMatchers(HttpMethod.PUT, "/usuario").authenticated()
-                        .requestMatchers("/solicitudes/**", "/donaciones/**").authenticated()
-                        .requestMatchers("/donation-states/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/usuario/**").authenticated()
+                        .requestMatchers("/auth/check", "/usuario/perfil", "/usuario/cambiar-password", "/usuario/update-password").authenticated()
+                        .requestMatchers("/solicitudes/**", "/donaciones/**", "/donation-states/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/usuario/**").authenticated() // Ver detalles de perfil propio
 
-                        // 4. CIERRE
+                        // --- 4. CIERRE DE SEGURIDAD ---
                         .anyRequest().authenticated())
+
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .httpBasic(Customizer.withDefaults());
 
@@ -82,17 +87,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOriginPatterns(Arrays.asList(
-                "http://localhost:5173",
-                "http://*.amazonaws.com",
-                "https://*.amazonaws.com"));
         // Puerto por defecto de Vite/React
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:3000", "http://localhost:80", "http://172.17.0.1:80"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

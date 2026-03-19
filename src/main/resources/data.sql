@@ -46,14 +46,14 @@ INSERT INTO estados_donacion (id, nombre) VALUES (4, 'Procesado');
 -- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
 -- VALUES ('Particular', '12345675X', '600111222', 'particular@ejemplo.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
 -- 
--- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
--- VALUES ('Bela', '12345645X', '600111222', 'bela@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
+VALUES ('Bela', '12345645X', '600111222', 'bela@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
 -- 
--- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
--- VALUES ('Empresa Bela', '72345635X', '600111222', 'bela@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Empresa de Bela', 'Ree', 'EMPRESA');
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
+VALUES ('Empresa Bela', '72345635X', '600111222', 'bela@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Empresa de Bela', 'Ree', 'EMPRESA');
 -- 
--- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
--- VALUES ('Bela', '19345675X', '600111222', 'bela@admin.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'ADMIN');
+INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
+VALUES ('Bela', '19345675X', '600111222', 'bela@admin.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'ADMIN');
 -- 
 -- INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
 -- VALUES ('Bela emproesa 2', '12345935X', '600111222', 'bela@empresa2.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'Otra emporesa', 'Recycle', 'EMPRESA');
@@ -68,9 +68,6 @@ INSERT INTO estados_donacion (id, nombre) VALUES (4, 'Procesado');
 -- Datos Usuario Finales
 
 --Bela
-INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol)
-VALUES ('Bela Part', '12345645X', '600111222', 'bela.part@particular.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Balmis 45', 'Alicante', '03001', 'PARTICULAR');
-
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol)
 VALUES ('Bela Emp', '12345222X', '600111223', 'bela.emp@empresa.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle empresa 10', 'Alicante', '03001', 'BelaWare SL', 'Bela Sim', 'EMPRESA');
 
@@ -116,39 +113,39 @@ VALUES ('Doctorbalmis', '43445905S', '600222223', 'balmis@empresa.com', '$2a$10$
     
     -- Periféricos
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Ratón Mars', 1, 2, 1, 'Ratón gastado con dos botones laterales y boton de cambio de DPI', 'http://localhost:8080/api/images/6');
+VALUES ('Ratón Mars', 1, 2, 1, 'Ratón gastado con dos botones laterales y boton de cambio de DPI', '/api/images/6');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Ratón inalambrico Logitec', 1, 2, 1, 'Ratón inalambrico con usb independiente con 2 botones laterales y poco rango de conexión', 'http://localhost:8080/api/images/5');
+VALUES ('Ratón inalambrico Logitec', 1, 2, 1, 'Ratón inalambrico con usb independiente con 2 botones laterales y poco rango de conexión', '/api/images/5');
 
     
     -- Sobremesa
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Torre Artec netanya', 3, 1, 1, 'Core I5 8RAM 1TB hhd y lector de Dvd', 'http://localhost:8080/api/images/0');
+VALUES ('Torre Artec netanya', 3, 1, 1, 'Core I5 8RAM 1TB hhd y lector de Dvd', '/api/images/0');
 
     
     -- Componentes
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Procesador Intel i7-6700K', 4, 1, 2, 'Procesador con apenas uso', 'http://localhost:8080/api/images/7');
+VALUES ('Procesador Intel i7-6700K', 4, 1, 2, 'Procesador con apenas uso', '/api/images/7');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('GPU Sapphire Radeon HD 5570', 4, 2, 1, 'Tarjeta gráfica con varios años de uso pero todavía funcional ni indicios de estropearse', 'http://localhost:8080/api/images/7');
+VALUES ('GPU Sapphire Radeon HD 5570', 4, 2, 1, 'Tarjeta gráfica con varios años de uso pero todavía funcional ni indicios de estropearse', '/api/images/7');
 
     
     -- Monitores
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Monitor Dell P2212', 5, 1, 1, 'Monitor Dell de una oficinia que pese al uso esta en buen estado todavía', 'http://localhost:8080/api/images/2');
+VALUES ('Monitor Dell P2212', 5, 1, 1, 'Monitor Dell de una oficinia que pese al uso esta en buen estado todavía', '/api/images/2');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Monitor VSDISPLAY LCD', 5, 3, 1, 'Monitor con 3 franjas verticales negras pero todavia funcional', 'http://localhost:8080/api/images/1');
+VALUES ('Monitor VSDISPLAY LCD', 5, 3, 1, 'Monitor con 3 franjas verticales negras pero todavia funcional', '/api/images/1');
 
     
     -- Portatiles
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Dell Inspiron', 2, 3, 1, '8Gb Ram 120Gb Hdd. Pantalla dañada por un golpe pero el resto del dispositivo funciona correctamente', 'http://localhost:8080/api/images/3');
+VALUES ('Dell Inspiron', 2, 3, 1, '8Gb Ram 120Gb Hdd. Pantalla dañada por un golpe pero el resto del dispositivo funciona correctamente', '/api/images/3');
 
 INSERT INTO productos(nombre, id_categoria, id_estado, id_disponibilidad, descripcion, imagen_url)
-VALUES ('Lenovo G500s', 2, 1, 1, '8Gb Ram 320Gb Hdd y webcam integrada', 'http://localhost:8080/api/images/4');
+VALUES ('Lenovo G500s', 2, 1, 1, '8Gb Ram 320Gb Hdd y webcam integrada', '/api/images/4');
 
 
 
@@ -193,7 +190,7 @@ VALUES (4, 2, 50, 'Donación de sets de ratones y teclados', 10.0);
 
 
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
-VALUES (4, 1, 35 'Donación de 3 torres', 25.0);
+VALUES (4, 1, 35, 'Donación de 3 torres', 25.0);
 
 
 -- Ricardo 
@@ -206,7 +203,7 @@ VALUES (6, 2, 50, 'Donación de sets de ratones y teclados', 10.0);
 
 
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
-VALUES (6, 1, 35 'Donación de torres', 25.0);
+VALUES (6, 1, 35, 'Donación de torres', 25.0);
 
 
 -- Aaron
@@ -219,7 +216,7 @@ VALUES (8, 2, 50, 'Donación de sets de ratones y teclados', 10.0);
 
 
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
-VALUES (8, 1, 35 'Donación de torres', 25.0);
+VALUES (8, 1, 35, 'Donación de torres', 25.0);
 
 -- Donaciones varias
 
@@ -233,7 +230,7 @@ INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, 
 VALUES (10, 3, 5, 'Donación de portatiles', 10.0);
 
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
-VALUES (10, 3, 35 'Donación de 3 torres', 25.0);
+VALUES (10, 3, 35, 'Donación de 3 torres', 25.0);
 
 ------------------------------------------------------
 -- Solicitudes de productos --------------------------
@@ -318,22 +315,22 @@ VALUES (7, 8, 'Necesito un portatil para estudiar online el modulo semipresencia
 -- USUARIOS FICTICIOS (6 PARTICULARES / BENEFICIARIOS)
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, rol) VALUES
-    ('Carlos Martínez', '11111111A', '600111222', 'carlos@mail.com', '12345678', 'Calle Mayor 12, 3B', 'Alicante', '03002', 'PARTICULAR'),
-    ('Laura Gómez', '22222222B', '600222333', 'laura@mail.com', '12345678', 'Avenida Libertad 45', 'San Vicente del Raspeig', '03690', 'PARTICULAR'),
-    ('Ahmed Ruiz', '33333333C', '600333444', 'ahmed@mail.com', '12345678', 'Plaza de los Luceros 1', 'Alicante', '03001', 'PARTICULAR'),
-    ('Sofía Navarro', '44444444D', '600444555', 'sofia@mail.com', '12345678', 'Calle del Sol 8', 'Mutxamel', '03110', 'PARTICULAR'),
-    ('David López', '55555555E', '600555666', 'david@mail.com', '12345678', 'Avenida Costa Blanca 120', 'San Juan Playa', '03540', 'PARTICULAR'),
-    ('Elena Torres', '66666666F', '600666777', 'elena@mail.com', '12345678', 'Calle San Fernando 33', 'Alicante', '03005', 'PARTICULAR');
+    ('Carlos Martínez', '11111111A', '600111222', 'carlos@mail.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Mayor 12, 3B', 'Alicante', '03002', 'PARTICULAR'),
+    ('Laura Gómez', '22222222B', '600222333', 'laura@mail.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Avenida Libertad 45', 'San Vicente del Raspeig', '03690', 'PARTICULAR'),
+    ('Ahmed Ruiz', '33333333C', '600333444', 'ahmed@mail.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Plaza de los Luceros 1', 'Alicante', '03001', 'PARTICULAR'),
+    ('Sofía Navarro', '44444444D', '600444555', 'sofia@mail.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle del Sol 8', 'Mutxamel', '03110', 'PARTICULAR'),
+    ('David López', '55555555E', '600555666', 'david@mail.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Avenida Costa Blanca 120', 'San Juan Playa', '03540', 'PARTICULAR'),
+    ('Elena Torres', '66666666F', '600666777', 'elena@mail.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle San Fernando 33', 'Alicante', '03005', 'PARTICULAR');
 
 -- USUARIOS FICTICIOS (6 EMPRESAS / DONANTES)
 
 INSERT INTO usuarios (nombre, dni, telefono, correo, contrasenia, direccion, localidad, codigo_postal, razon_social, nombre_contacto, rol) VALUES
-    ('TechCorp Solutions', 'B11111111', '965111222', 'info@techcorp.com', '12345678', 'Parque Tecnológico, Nave 4', 'Alicante', '03008', 'TechCorp Iberia S.L.', 'Marcos Soler', 'EMPRESA'),
-    ('InnovaTech Alicante', 'B22222222', '965222333', 'donaciones@innovatech.es', '12345678', 'Polígono Canastell, C/ Industria', 'San Vicente del Raspeig', '03690', 'Innovación Tecnológica S.A.', 'Sara Méndez', 'EMPRESA'),
-    ('Global Logistics', 'B33333333', '965333444', 'sostenibilidad@global.com', '12345678', 'Avenida de Elche 150', 'Alicante', '03008', 'Global Logistics España', 'Javier Ramos', 'EMPRESA'),
-    ('EcoSoft Dev', 'B44444444', '965444555', 'rrhh@ecosoft.com', '12345678', 'Calle Innovación 2', 'Mutxamel', '03110', 'EcoSoft Development S.L.', 'Ana Pastor', 'EMPRESA'),
-    ('Agencia Creativa', 'B55555555', '965555666', 'hola@agenciacreativa.es', '12345678', 'Calle San Rafael 4', 'San Juan Pueblo', '03550', 'Estudio Creativo S.A.', 'Pedro Giménez', 'EMPRESA'),
-    ('Consultoría IT', 'B66666666', '965666777', 'admin@consultoriait.es', '12345678', 'Avenida Maisonnave 28, Entresuelo', 'Alicante', '03003', 'Consultores Informáticos S.L.', 'Lucía Vidal', 'EMPRESA');
+    ('TechCorp Solutions', 'B11111111', '965111222', 'info@techcorp.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Parque Tecnológico, Nave 4', 'Alicante', '03008', 'TechCorp Iberia S.L.', 'Marcos Soler', 'EMPRESA'),
+    ('InnovaTech Alicante', 'B22222222', '965222333', 'donaciones@innovatech.es', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Polígono Canastell, C/ Industria', 'San Vicente del Raspeig', '03690', 'Innovación Tecnológica S.A.', 'Sara Méndez', 'EMPRESA'),
+    ('Global Logistics', 'B33333333', '965333444', 'sostenibilidad@global.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Avenida de Elche 150', 'Alicante', '03008', 'Global Logistics España', 'Javier Ramos', 'EMPRESA'),
+    ('EcoSoft Dev', 'B44444444', '965444555', 'rrhh@ecosoft.com', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle Innovación 2', 'Mutxamel', '03110', 'EcoSoft Development S.L.', 'Ana Pastor', 'EMPRESA'),
+    ('Agencia Creativa', 'B55555555', '965555666', 'hola@agenciacreativa.es', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Calle San Rafael 4', 'San Juan Pueblo', '03550', 'Estudio Creativo S.A.', 'Pedro Giménez', 'EMPRESA'),
+    ('Consultoría IT', 'B66666666', '965666777', 'admin@consultoriait.es', '$2a$10$ayw3FCBIkupFt5n9lrmJQe9XZMJhZiNCjaoOkXo/Ba0KZgymO01ce', 'Avenida Maisonnave 28, Entresuelo', 'Alicante', '03003', 'Consultores Informáticos S.L.', 'Lucía Vidal', 'EMPRESA');
 
 -- RESEÑAS DE LA COMUNIDAD (12 RESEÑAS)
 
@@ -356,3 +353,12 @@ VALUES (11, 3, 6, 'Donación de mouse', 1.0);
 
 INSERT INTO donaciones (id_donante, id_estado, cantidad_productos, descripcion, peso)
 VALUES (5, 3, 8, 'Donación de teclados', 1.0);
+
+-- 6 Solicitudes extras con estado ENTREGADA (ID 5) para subir el contador de la Home
+INSERT INTO solicitudes (id_solicitante, id_producto, motivo, id_estado) VALUES
+    (11, 1, 'Necesito renovar mi ratón para clases de ofimática.', 5),
+    (12, 2, 'Mi ratón actual falla mucho y no puedo permitirme uno nuevo.', 5),
+    (13, 3, 'Para mis estudios de administración, este PC me vendría genial.', 5),
+    (14, 5, 'Necesito ampliar mi equipo actual para poder hacer los trabajos de clase.', 5),
+    (15, 6, 'Para poder estudiar mejor, un segundo monitor me ayudaría muchísimo.', 5),
+    (16, 8, 'Mi portátil se rompió y ahora mismo no puedo comprar otro para seguir el curso.', 5);

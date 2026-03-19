@@ -34,8 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return User.withUsername(usuario.getCorreo())
                 .password(usuario.getPassword()) // Usamos el nombre de tu campo en la DB
-                // .authorities("ROLE_" + rolActual) BELA
-                .roles(rolActual) // o sino (usuario.getRol().name())
+                .authorities("ROLE_" + rolActual) 
                 .build();
     }
 }

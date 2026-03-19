@@ -11,5 +11,6 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     //Método para buscar las solicitudes por usuario   
     List<Request> findByApplicantId(int applicantId);
 
-    long countByStateId(int stateId);
+    // Método para contar solicitudes por nombre de estado
+    long countByStateName(String stateName);
 }
